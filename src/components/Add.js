@@ -1,10 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
 import { actionCreators as detailActions } from "../redux/modules/detail";
 
 const Add = (props) => {
 
+    const history = useHistory();
     const dispatch = useDispatch();
     const [title, setTitle] = React.useState();
     const [content, setContent] = React.useState();
@@ -55,7 +57,12 @@ const Add = (props) => {
                 <button>purple</button>
             </div>
             <div>
-                <button onClick={_addContent}>저장하기</button>
+                <button onClick={() => {
+                    _addContent();
+                    window.alert("저장완료");
+                    history.push("/detail");
+                }}
+                >저장하기</button>
             </div>
 
         </React.Fragment>
