@@ -31,9 +31,12 @@ logIn:()=>instance.get('/login'),
 signUp:()=>instance.get('/signup'),
 
 //회원가입 등록
-createAccount:(list)=>instance.post('/signup',list),
+createAccount:(user)=>instance.post('/signup',user),
 
 //회원가입시 아이디 중복
-checkOverlapID:(userID)=>instance.post('/signup/checkup',{userID})
+checkOverlapID:(userID)=>instance.post('/signup/checkup',{userID}),
+
+//로그인
+loginPost : (user)=>instance.post('/login',user)
 
 };

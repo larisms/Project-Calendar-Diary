@@ -14,17 +14,17 @@ const initialState = {
             confirmPW: "confirmPW"
         }
     ],
-    warnID: ""
+    warnID: "",
+    is_login:false,
 }
 
 const CREATE_ACCOUNT = "CREATE_ACCOUNT";
 const ID_OVERLAP = "ID_OVERLAP";
+const LOGIN = "LOGIN"
 
-const creatAccount_ = createAction(
-    CREATE_ACCOUNT,
-    (userID, PW, confirmPW) => ({userID, PW, confirmPW})
-);
+const creatAccount_ = createAction(CREATE_ACCOUNT, (userID, PW, confirmPW) => ({userID, PW, confirmPW}));
 const checkOverlapID = createAction(ID_OVERLAP, (warnID) => ({warnID}))
+const is_login = createAction(LOGIN,(boolean)=>({boolean}));
 
 //회원가입 등록
 const createAccountMiddleware = (userID, PW, confirmPW) => {
@@ -52,7 +52,7 @@ const createAccountMiddleware = (userID, PW, confirmPW) => {
 }
 
 //회원가입시 아이디 중복확인
-const checkOverlapIDMiddlevare = (userID) => {
+const checkOverlapIDMiddleware = (userID) => {
     return function (dispatch, getState, {history}) {
         apis
             .checkOverlapID(userID)
@@ -66,6 +66,21 @@ const checkOverlapIDMiddlevare = (userID) => {
             .catch((error) => {
                 console.log(error)
             });
+    }
+}
+
+//로그인
+const loginMiddleware = (userID,PW ) => {
+    return function(dispatch, getState, {history}){
+        const user = {userID:userID, PW:PW}
+        apis.loginPost(user).then((res)=>{
+            if(res.data === "success"){
+                dispatch(is_login(true));
+                history.push('/');
+            }else{
+                alert('로그인 실패');
+            }
+        })
     }
 }
 
@@ -83,12 +98,17 @@ export default handleActions({
     }),
     [ID_OVERLAP]: (state, action) => (state, (draft) => {
         draft.ID_OVERLAP = action.payload.warnID
+    }),
+    [LOGIN]:(state, action)=>(state, (draft)=>{
+        draft.is_login = action.payload.boolean
     })
 }, initialState);
 
 export const actionCreators = {
     creatAccount_,
     checkOverlapID,
+    is_login,
     createAccountMiddleware,
-    checkOverlapIDMiddlevare
+    checkOverlapIDMiddleware,
+    loginMiddleware
 }
