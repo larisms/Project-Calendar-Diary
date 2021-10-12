@@ -1,14 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
+import { actionCreators as detailActions } from "../redux/modules/detail";
 
 const Detail = (props) => {
 
     const history = useHistory();
+    const dispatch = useDispatch
     const post_list = useSelector((state) => state.detail.list);
     // console.log(post_list)
     // console.log(post_list.title)
+
+    // React.useEffect(() => {
+    //     dispatch(detailActions.setContentMW());
+    // },[]);
 
     return (
         <React.Fragment>

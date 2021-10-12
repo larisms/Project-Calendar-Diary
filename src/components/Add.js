@@ -8,6 +8,7 @@ const Add = (props) => {
 
     const history = useHistory();
     const dispatch = useDispatch();
+
     const [title, setTitle] = React.useState();
     const [content, setContent] = React.useState();
 
@@ -26,7 +27,7 @@ const Add = (props) => {
 
 
     const _addContent = () => {
-        dispatch(detailActions.addContent(post))
+        dispatch(detailActions.addContentMW(post))
     }
 
 
