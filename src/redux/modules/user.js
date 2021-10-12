@@ -57,11 +57,7 @@ const checkOverlapIDMiddleware = (userID) => {
         apis
             .checkOverlapID(userID)
             .then((res) => {
-                if (res.data === "seccess") {
-                    dispatch(checkOverlapID("사용 가능한 아이디입니다."))
-                }else{
-                    dispatch(checkOverlapID("사용 할 수 없는 아이디입니다."))
-                }
+                console.log(res)
             })
             .catch((error) => {
                 console.log(error)
@@ -74,12 +70,13 @@ const loginMiddleware = (userID,PW ) => {
     return function(dispatch, getState, {history}){
         const user = {userID:userID, PW:PW}
         apis.loginPost(user).then((res)=>{
-            if(res.data === "success"){
-                dispatch(is_login(true));
-                history.push('/');
-            }else{
-                alert('로그인 실패');
-            }
+            // if(res.data === "success"){
+            //     dispatch(is_login(true));
+            //     history.push('/');
+            // }else{
+            //     alert('로그인 실패');
+            // }
+            console.log(res);
         })
     }
 }
