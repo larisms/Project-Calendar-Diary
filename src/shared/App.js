@@ -24,8 +24,8 @@ function App() {
 
   return (
     <ConnectedRouter history={history}>
-      {!is_login? <Route path="/login" exact component={User}/> : null}
-      <Route path="/" exact component={Main}/>
+      {/* {!is_login? <Route path="/login" exact component={User}/> : null} */}
+      {is_login? <Route path="/" exact component={Main}/>:<Route path="/login" exact component={User}/>}
     </ConnectedRouter>
   );
 }
