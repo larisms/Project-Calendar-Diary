@@ -51,7 +51,8 @@ const Signup = () => {
     //중복확인 클릭시
     const overlap = () => {
         dispatch(signupAction.checkOverlapIDMiddleware(ID.current.value))
-        setWarnID(overlapID)
+        if(overlapID !== ""){setWarnID(overlapID)}else{setWarnID("아 또 실패ㅡㅡ")}
+        
     }
 
     //가입하기 버튼 클릭시

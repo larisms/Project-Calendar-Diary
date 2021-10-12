@@ -94,7 +94,7 @@ export default handleActions({
         }
     }),
     [ID_OVERLAP]: (state, action) => (state, (draft) => {
-        draft.warnID = action.payload.warnID
+        draft.ID_OVERLAP = action.payload.warnID
     }),
     [LOGIN]:(state, action)=>(state, (draft)=>{
         draft.is_login = action.payload.boolean
