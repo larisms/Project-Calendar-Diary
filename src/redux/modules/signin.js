@@ -26,8 +26,12 @@ const signUp = createAction(SIGNUP, (userID, PW, confirmPW) => ({userID, PW, con
 const createAccountMiddleware = (userID,PW,confirmPW) => {
     return function (dispatch, getState, {history}) {
         const user = {userID:userID, PW:PW, confirmPW:confirmPW}
+        console.log(user);
         apis.createAccount(user)
-        .then(()=>{ dispatch(signUp(userID,PW,confirmPW))})
+        .then(()=>{ 
+            dispatch(signUp(userID,PW,confirmPW))
+            console.log("값 넘겨줌")
+        })
         .catch((error)=>{console.log(error)});
     }
 }

@@ -54,7 +54,7 @@ const Signup = () => {
         //     setwarnCheckPW('비밀번호가 서로 다릅니다!')
         } else {
             //axios로 값 넘겨줌
-            dispatch(signupAction.createAccountMiddleware(ID,PW,checkPW))
+            dispatch(signupAction.createAccountMiddleware(ID.current.value,PW.current.value,checkPW.current.value))
             // dispatch(signupShow(false));
             // dispatch(loginShow(true));
         }
