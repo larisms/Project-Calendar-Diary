@@ -50,8 +50,8 @@ const Signup = () => {
         //회원가입 절차
         if (ID === "" || PW === "" || checkPW === "") {
             alert("입력창에 값을 입력해주세요!")
-        } else if (PW !== checkPW) {
-            setwarnCheckPW('비밀번호가 서로 다릅니다!')
+        // } else if (PW !== checkPW) {
+        //     setwarnCheckPW('비밀번호가 서로 다릅니다!')
         } else {
             //axios로 값 넘겨줌
             dispatch(signupAction.createAccountMiddleware(ID,PW,checkPW))
