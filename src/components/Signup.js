@@ -1,5 +1,5 @@
 import React from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import _ from "lodash";
 
 
@@ -13,6 +13,8 @@ const Signup = () => {
     const [warnID, setWarnID] = React.useState();
     const [warnPW, setwarnPW] = React.useState();
     const [warnCheckPW, setwarnCheckPW] = React.useState();
+
+    const overlapID = useSelector(state => state.user.warnID)
 
     //입력이 끝난 input 값
     const ID = React.useRef();
@@ -46,10 +48,10 @@ const Signup = () => {
     }, 1000), [])
 
 
-
     //중복확인 클릭시
     const overlap = () => {
-        console.log("아이디 중복 확인")
+        dispatch(signupAction.checkOverlapIDMiddlevare(ID.current.value));
+        setWarnID(overlapID);
     }
 
     //가입하기 버튼 클릭시
