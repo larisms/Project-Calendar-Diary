@@ -3,6 +3,7 @@
 import produce from "immer";
 import {createAction, handleActions} from "redux-actions";
 import { apis } from "../../lib/axios";
+import {signupShow, loginShow} from "./show";
 
 //로그인,회원가입 페이지 렌더링 응답?
 
@@ -26,11 +27,15 @@ const signUp = createAction(SIGNUP, (userID, PW, confirmPW) => ({userID, PW, con
 const createAccountMiddleware = (userID,PW,confirmPW) => {
     return function (dispatch, getState, {history}) {
         const user = {userID:userID, PW:PW, confirmPW:confirmPW}
-        console.log(user);
+        
         apis.createAccount(user)
-        .then(()=>{ 
+        .then((res)=>{ 
             dispatch(signUp(userID,PW,confirmPW))
-            console.log("값 넘겨줌")
+            console.log("React send User info :::",user)
+            if(res.data === "success"){
+                dispatch(signupShow(false));
+                dispatch(loginShow(true));
+            }
         })
         .catch((error)=>{console.log(error)});
     }

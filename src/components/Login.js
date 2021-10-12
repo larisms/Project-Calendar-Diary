@@ -6,10 +6,17 @@ const Login = () => {
 
     const dispatch = useDispatch();
 
+    const ID = React.useRef();
+    const PW = React.useRef();
+
     const goToSignup = () => {
         dispatch(loginShow(false));
         dispatch(signupShow(true));
     }
+
+    // const login = () => {
+    //     if
+    // }
 
     return (
         <React.Fragment>
@@ -17,11 +24,11 @@ const Login = () => {
                 <h1>로그인</h1>
                 <label>
                     <p>ID</p>
-                    <input type="text"/>
+                    <input type="text" ref={ID}/>
                 </label>
                 <label>
                     <p>PW</p>
-                    <input type="password"/>
+                    <input type="password" ref={PW}/>
                 </label>
                 <button onClick={goToSignup}>회원가입하기</button>
                 <button>로그인</button>

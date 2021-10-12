@@ -1,6 +1,6 @@
 import React from "react";
 
-import Signin from "../pages/Signin";
+import User from "../pages/User";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/store";
 import { Route } from "react-router";
@@ -8,7 +8,7 @@ import { Route } from "react-router";
 function App() {
   return (
     <ConnectedRouter history={history}>
-      <Route path="/sign" component={Signin}/>
+      <Route path="/sign" component={User}/>
     </ConnectedRouter>
   );
 }
