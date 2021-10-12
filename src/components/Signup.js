@@ -1,7 +1,9 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import {signupShow, loginShow} from "../redux/modules/show";
 import _ from "lodash";
+
+import {signupShow, loginShow} from "../redux/modules/show";
+import { actionCreators as signupAction } from "../redux/modules/signin";
 
 const Signup = () => {
 
@@ -51,8 +53,10 @@ const Signup = () => {
         } else if (PW !== checkPW) {
             setwarnCheckPW('비밀번호가 서로 다릅니다!')
         } else {
-            dispatch(signupShow(false));
-            dispatch(loginShow(true));
+            //axios로 값 넘겨줌
+            dispatch(signupAction.createAccountMiddleware(ID,PW,checkPW))
+            // dispatch(signupShow(false));
+            // dispatch(loginShow(true));
         }
     }
 
