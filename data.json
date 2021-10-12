@@ -1,67 +1,24 @@
 {
-  "bbbb": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    },
-    {
-      "id": 6,
-      "title": "cccccc",
-      "body": "ccccccc"
-    },
-    {
-      "id": 7,
-      "title": "bbbbb",
-      "body": "bbbbbb"
-    },
-    {
-      "id": 8,
-      "title": "1111",
-      "body": "22222"
-    },
-    {
-      "id": 9,
-      "title": "5555",
-      "body": "5555"
-    },
+  "diary": [
     {
       "id": 999,
-      "title": "777778",
-      "content": "777778"
-    }
-  ],
-
-  "7777": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "title": "555555",
+      "content": "555555"
     },
     {
-      "id": 6,
-      "title": "cccccc",
-      "body": "ccccccc"
+      "id": 99,
+      "title": "77777",
+      "content": "77777"
     },
     {
-      "id": 7,
-      "title": "bbbbb",
-      "body": "bbbbbb"
+      "title": "88888",
+      "content": "888888",
+      "id": 1000
     },
     {
-      "id": 8,
-      "title": "1111",
-      "body": "22222"
-    },
-    {
-      "id": 9,
-      "title": "5555",
-      "body": "5555"
-    },
-    {
-      "id": 999,
-      "title": "777778",
-      "content": "777778"
+      "title": "999999",
+      "content": "999999",
+      "id": 1001
     }
   ]
 }

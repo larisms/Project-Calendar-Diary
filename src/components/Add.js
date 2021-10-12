@@ -20,7 +20,7 @@ const Add = (props) => {
     }
 
     const post = {
-        id: 999,
+        
         title: title,
         content: content,
     }
@@ -29,6 +29,8 @@ const Add = (props) => {
 
     const _addContent = () => {
         dispatch(detailActions.addContentMW(post))
+        window.alert("저장완료");
+        history.push("/detail");
     }
 
 
@@ -59,11 +61,7 @@ const Add = (props) => {
                 <button>purple</button>
             </div>
             <div>
-                <button onClick={() => {
-                    _addContent();
-                    window.alert("저장완료");
-                    history.push("/detail");
-                }}
+                <button onClick={_addContent}
                 >저장하기</button>
             </div>
 

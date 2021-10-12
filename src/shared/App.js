@@ -12,6 +12,7 @@ function App() {
     <React.Fragment>
       <BrowserRouter>
         <Route path="/add" exact component={Add} />
+        <Route path="/add/:id" exact component={Add} />
         <Route path="/detail" exact component={Detail} />
       </BrowserRouter>
     </React.Fragment>
