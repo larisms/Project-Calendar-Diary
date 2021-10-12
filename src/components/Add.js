@@ -20,6 +20,7 @@ const Add = (props) => {
     }
 
     const post = {
+        id: 999,
         title: title,
         content: content,
     }

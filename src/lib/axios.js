@@ -21,12 +21,10 @@ export const apis = {
 //   delPost: (id) => instance.delete(`/posts/${id}`),
 
   // 게시물 불러오기
-  setContentAX: () => instance.get('/diary'),
+  setContentAX: () => instance.get("/diary"),
 
 // 게시물 작성하기
-addContentAX: (post) => instance.post('/diary', post),
-
-
+addContentAX: (post) => instance.post("/diary", post),
 
 
 };

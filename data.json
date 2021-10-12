@@ -1,19 +1,67 @@
 {
-  "posts": [
+  "bbbb": [
     {
       "id": 1,
       "title": "json-server",
       "author": "typicode"
+    },
+    {
+      "id": 6,
+      "title": "cccccc",
+      "body": "ccccccc"
+    },
+    {
+      "id": 7,
+      "title": "bbbbb",
+      "body": "bbbbbb"
+    },
+    {
+      "id": 8,
+      "title": "1111",
+      "body": "22222"
+    },
+    {
+      "id": 9,
+      "title": "5555",
+      "body": "5555"
+    },
+    {
+      "id": 999,
+      "title": "777778",
+      "content": "777778"
     }
   ],
-  "comments": [
+
+  "7777": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 6,
+      "title": "cccccc",
+      "body": "ccccccc"
+    },
+    {
+      "id": 7,
+      "title": "bbbbb",
+      "body": "bbbbbb"
+    },
+    {
+      "id": 8,
+      "title": "1111",
+      "body": "22222"
+    },
+    {
+      "id": 9,
+      "title": "5555",
+      "body": "5555"
+    },
+    {
+      "id": 999,
+      "title": "777778",
+      "content": "777778"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

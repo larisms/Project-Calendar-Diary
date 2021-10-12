@@ -36,19 +36,23 @@ const addContentMW = (post) => {
     }
 };
 
-// const setContentMW = () =>{
-//     return function(dispatch, getState, {history}){
-//         apis
-//         .setContentAX()
-//         .then((res) => {
-//             const post_list = res.data;
-//             dispatch(setContent(post_list));
-//         })
-//         .catch((err) => {
-//             console.log("로드에러")
-//         })
-//     }
-// }
+const setContentMW = () =>{
+    return function(dispatch, getState, {history}){
+        apis
+        .setContentAX()
+        .then((res) => {
+            
+            const _post_list = res
+            console.log("리스폰스", _post_list);
+            const post_list = res.data;
+            console.log("리스폰스데이터", post_list);
+            dispatch(setContent(post_list));
+        })
+        .catch((err) => {
+            console.log("로드에러", err)
+        })
+    }
+}
 
 
 export default handleActions(
@@ -68,7 +72,7 @@ const actionCreators = {
     setContent,
     addContent,
     addContentMW,
-    // setContentMW,
+    setContentMW,
 };
 
 export { actionCreators };

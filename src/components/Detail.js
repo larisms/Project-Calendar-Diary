@@ -7,14 +7,15 @@ import { actionCreators as detailActions } from "../redux/modules/detail";
 const Detail = (props) => {
 
     const history = useHistory();
-    const dispatch = useDispatch
+    const dispatch = useDispatch();
     const post_list = useSelector((state) => state.detail.list);
-    // console.log(post_list)
-    // console.log(post_list.title)
 
-    // React.useEffect(() => {
-    //     dispatch(detailActions.setContentMW());
-    // },[]);
+    console.log("디테일에포스트리스트", post_list)
+    console.log(post_list.title)
+
+    React.useEffect(() => {
+        dispatch(detailActions.setContentMW());
+    },[]);
 
     return (
         <React.Fragment>
