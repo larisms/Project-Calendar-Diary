@@ -20,7 +20,7 @@ const Login = () => {
 
     const login = () => {
         if(ID.current.value !== "" && PW.current.value !== ""){
-            dispatch(loginAction.loginMiddleware(ID.current.value,PW.current.value))
+            dispatch(loginAction.loginMW(ID.current.value,PW.current.value))
         }else if(ID.current.value === ""){
             setWarnID('아이디를 입력해주세요!');
         }else if(PW.current.value === ""){
@@ -28,13 +28,15 @@ const Login = () => {
         }
     }
 
+
+
     return (
         <React.Fragment>
             <section>
                 <h1>로그인</h1>
                 <label>
                     <p>ID</p>
-                    <input type="text" ref={ID}/>
+                    <input type="text" ref={ID} onChange={()=>{setWarnID("")}}/>
                     <span
                         style={{
                             color: "#ccc"
@@ -42,7 +44,7 @@ const Login = () => {
                 </label>
                 <label>
                     <p>PW</p>
-                    <input type="password" ref={PW}/>
+                    <input type="password" ref={PW} onChange={()=>{setWarnPW("")}}/>
                     <span
                         style={{
                             color: "#ccc"

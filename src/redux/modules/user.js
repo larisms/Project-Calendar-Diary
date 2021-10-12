@@ -39,7 +39,7 @@ const createAccountMW = (userID, PW, confirmPW) => {
             .createAccountAX(user)
             .then((res) => {
                 console.log("React send User info :::", user)
-                if (res.data.m === "success") {
+                if (res.data.msg === "success") {
                     dispatch(creatAccount_(user))
                     dispatch(signupShow(false));
                     dispatch(loginShow(true));
