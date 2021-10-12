@@ -1,18 +1,27 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch} from "react-redux";
 import User from "../pages/User";
 import Main from "../pages/Main";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/store";
 import { Route } from "react-router";
+import {apis} from "../lib/axios"
+import {actionCreators as userAction} from "../redux/modules/user"
 
 function App() {
-  const is_login = useSelector(state => state.user.is_login)
+  // const dispatch = useDispatch();
+  // const is_login = useSelector(state => state.user.is_login)
+
   React.useEffect(()=>{
-    if(!is_login){
-      history.push("/login")
-    }
+    apis.logInAX().then((res)=>{
+      if(res.data.msg === "success"){
+          history.push('/');
+      }else{
+        history.push('/login');
+      }
+      console.log(res.data[0].msg);
   })
+  },[])
 
   return (
     <ConnectedRouter history={history}>

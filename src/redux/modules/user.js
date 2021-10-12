@@ -15,16 +15,14 @@ const initialState = {
         }
     ],
     warnID: "",
-    is_login:false,
 }
 
 const CREATE_ACCOUNT = "CREATE_ACCOUNT";
 const WARN_ID = "WARN_ID";
-const LOGIN = "LOGIN"
 
 const creatAccount_ = createAction(CREATE_ACCOUNT, (userID, PW, confirmPW) => ({userID, PW, confirmPW}));
 const changeWarnID = createAction(WARN_ID, (warnID) => ({warnID}))
-const is_login = createAction(LOGIN,(boolean)=>({boolean}));
+
 
 //회원가입 등록
 const createAccountMW = (userID, PW, confirmPW) => {
@@ -44,7 +42,7 @@ const createAccountMW = (userID, PW, confirmPW) => {
                     dispatch(signupShow(false));
                     dispatch(loginShow(true));
                 }else{
-                    alert("response success가 불러와지지 않았음.")
+                    console.log("response success가 불러와지지 않았음.")
                 }
                 
             })
@@ -75,7 +73,6 @@ const loginMW = (userID,PW ) => {
         const user = {userID:userID, PW:PW}
         apis.loginPostAX(user).then((res)=>{
             if(res.data.msg === "success"){
-                dispatch(is_login(true));
                 history.push('/');
             }else{
                 alert('로그인 실패');
@@ -100,15 +97,11 @@ export default handleActions({
     [WARN_ID]: (state, action) =>  produce(state, (draft) => {
         draft.warnID = action.payload.warnID
     }),
-    [LOGIN]:(state, action)=> produce(state, (draft)=>{
-        draft.is_login = action.payload.boolean
-    })
 }, initialState);
 
 export const actionCreators = {
     creatAccount_,
     changeWarnID,
-    is_login,
     createAccountMW,
     checkOverlapMW,
     loginMW
