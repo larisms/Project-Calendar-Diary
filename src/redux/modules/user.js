@@ -39,7 +39,7 @@ const createAccountMW = (userID, PW, confirmPW) => {
             .createAccountAX(user)
             .then((res) => {
                 console.log("React send User info :::", user)
-                if (res.data === "success") {
+                if (res.data.m === "success") {
                     dispatch(creatAccount_(user))
                     dispatch(signupShow(false));
                     dispatch(loginShow(true));
@@ -73,7 +73,7 @@ const checkOverlapMW = (userID) => {
 const loginMW = (userID,PW ) => {
     return function(dispatch, getState, {history}){
         const user = {userID:userID, PW:PW}
-        apis.loginPostAX(user).then((res)=>{
+        apis.logInAX(user).then((res)=>{
             if(res.data.msg === "success"){
                 dispatch(is_login(true));
                 history.push('/');
