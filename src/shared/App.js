@@ -3,7 +3,7 @@ import { useSelector , useDispatch} from "react-redux";
 import User from "../pages/User";
 import Main from "../pages/Main";
 import { ConnectedRouter } from "connected-react-router";
-import { history } from "../redux/store";
+import { history } from "../redux/configureStore";
 import { Route } from "react-router";
 import {apis} from "../lib/axios"
 import {actionCreators as userAction} from "../redux/modules/user"
