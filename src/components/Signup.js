@@ -56,7 +56,6 @@ const Signup = () => {
 
     //가입하기 버튼 클릭시
     const signup = () => {
-        console.log(ID.current.value)
         //회원가입 절차
         if (ID.current.value === "" || PW.current.value === "" || checkPW.current.value === "") {
             alert("입력창에 값을 입력해주세요!")
