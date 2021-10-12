@@ -73,7 +73,7 @@ const loginMW = (userID,PW ) => {
         const user = {userID:userID, PW:PW}
         apis.loginPostAX(user).then((res)=>{
             if(res.data.msg === "success"){
-                history.push('/');
+                window.location.reload();
             }else{
                 alert('로그인 실패');
             }

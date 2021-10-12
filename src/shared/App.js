@@ -16,15 +16,14 @@ function App() {
           setstate(true);
           history.push('/');
       }else{
-          history.push('/login');
           setstate(false);
+          history.push('/login');
       }
   })
   },[])
 
   return (
     <ConnectedRouter history={history}>
-      {/* {!is_login? <Route path="/login" exact component={User}/> : null} */}
       {is_login? <Route path="/" exact component={Main}/>:<Route path="/login" exact component={User}/>}
     </ConnectedRouter>
   );
