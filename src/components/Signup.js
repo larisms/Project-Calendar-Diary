@@ -50,7 +50,7 @@ const Signup = () => {
 
     //중복확인 클릭시
     const overlap = () => {
-        dispatch(signupAction.checkOverlapIDMiddlevare(ID.current.value));
+        dispatch(signupAction.checkOverlapIDMiddleware(ID.current.value));
         setWarnID(overlapID);
     }
 
