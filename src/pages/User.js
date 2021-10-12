@@ -6,8 +6,12 @@ import Signup from "../components/Signup"
 
 
 const Signin =()=>{
+    
     const Login_control = useSelector(state => state.show.login);
     const Signup_control = useSelector(state => state.show.signup);
+    // React.useEffect(()=>{
+
+    // },[Login_control])
 
     return (
         <React.Fragment>

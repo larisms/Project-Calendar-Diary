@@ -10,11 +10,11 @@ const Signup = () => {
     const dispatch = useDispatch();
 
     //경고문 설정
-    const [warnID, setWarnID] = React.useState();
+    // const [warnID, setWarnID] = React.useState();
     const [warnPW, setwarnPW] = React.useState();
     const [warnCheckPW, setwarnCheckPW] = React.useState();
 
-    const overlapID = useSelector(state => state.user.warnID)
+    const warnID = useSelector(state => state.user.warnID);
 
     //입력이 끝난 input 값
     const ID = React.useRef();
@@ -26,12 +26,12 @@ const Signup = () => {
         const value = e.target.value;
         var eng = /^[a-zA-Z]*$/;
         if (!eng.test(value)) {
-            setWarnID("영어만 입력해주세요")
+            dispatch(signupAction.changeWarnID("영어만 입력해주세요"))
         } else if (value.length < 4){
-            setWarnID("4자 이상 입력해주세요")
+            dispatch(signupAction.changeWarnID("4자 이상 입력해주세요"))
         } 
         else {
-            setWarnID("")
+            dispatch(signupAction.changeWarnID(""))
         }
     }, 1000), [])
 
@@ -49,10 +49,10 @@ const Signup = () => {
 
 
     //중복확인 클릭시
+
     const overlap = () => {
-        dispatch(signupAction.checkOverlapIDMiddleware(ID.current.value))
-        if(overlapID !== ""){setWarnID(overlapID)}else{setWarnID("아 또 실패ㅡㅡ")}
-        
+        dispatch(signupAction.checkOverlapMW(ID.current.value)) 
+        // setWarnID(overlapID);
     }
 
     //가입하기 버튼 클릭시
@@ -64,7 +64,7 @@ const Signup = () => {
             setwarnCheckPW('비밀번호가 서로 다릅니다!')
         } else {
             //axios로 값 넘겨줌
-            dispatch(signupAction.createAccountMiddleware(ID.current.value,PW.current.value,checkPW.current.value))
+            dispatch(signupAction.createAccountMW(ID.current.value,PW.current.value,checkPW.current.value))
         }
     }
 

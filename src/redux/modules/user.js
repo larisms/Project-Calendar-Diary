@@ -19,15 +19,15 @@ const initialState = {
 }
 
 const CREATE_ACCOUNT = "CREATE_ACCOUNT";
-const ID_OVERLAP = "ID_OVERLAP";
+const WARN_ID = "WARN_ID";
 const LOGIN = "LOGIN"
 
 const creatAccount_ = createAction(CREATE_ACCOUNT, (userID, PW, confirmPW) => ({userID, PW, confirmPW}));
-const checkOverlapID = createAction(ID_OVERLAP, (warnID) => ({warnID}))
+const changeWarnID = createAction(WARN_ID, (warnID) => ({warnID}))
 const is_login = createAction(LOGIN,(boolean)=>({boolean}));
 
 //회원가입 등록
-const createAccountMiddleware = (userID, PW, confirmPW) => {
+const createAccountMW = (userID, PW, confirmPW) => {
     return function (dispatch, getState, {history}) {
         const user = {
             userID: userID,
@@ -36,14 +36,17 @@ const createAccountMiddleware = (userID, PW, confirmPW) => {
         }
 
         apis
-            .createAccount(user)
+            .createAccountAX(user)
             .then((res) => {
                 console.log("React send User info :::", user)
                 if (res.data === "success") {
                     dispatch(creatAccount_(user))
                     dispatch(signupShow(false));
                     dispatch(loginShow(true));
+                }else{
+                    alert("response success가 불러와지지 않았음.")
                 }
+                
             })
             .catch((error) => {
                 console.log(error)
@@ -52,12 +55,13 @@ const createAccountMiddleware = (userID, PW, confirmPW) => {
 }
 
 //회원가입시 아이디 중복확인
-const checkOverlapIDMiddleware = (userID) => {
+const checkOverlapMW = (userID) => {
     return function (dispatch, getState, {history}) {
         apis
-            .checkOverlapID(userID)
+            .checkOverlapAX(userID)
             .then((res) => {
-                dispatch(checkOverlapID(res.data.msg))
+                dispatch(changeWarnID(res.data.msg))
+                console.log("중복확인 성공")
             })
             .catch((error) => {
                 console.log(error)
@@ -66,10 +70,10 @@ const checkOverlapIDMiddleware = (userID) => {
 }
 
 //로그인
-const loginMiddleware = (userID,PW ) => {
+const loginMW = (userID,PW ) => {
     return function(dispatch, getState, {history}){
         const user = {userID:userID, PW:PW}
-        apis.loginPost(user).then((res)=>{
+        apis.loginPostAX(user).then((res)=>{
             if(res.data.msg === "success"){
                 dispatch(is_login(true));
                 history.push('/');
@@ -93,19 +97,19 @@ export default handleActions({
             newAccount
         }
     }),
-    [ID_OVERLAP]: (state, action) => (state, (draft) => {
-        draft.ID_OVERLAP = action.payload.warnID
+    [WARN_ID]: (state, action) =>  produce(state, (draft) => {
+        draft.warnID = action.payload.warnID
     }),
-    [LOGIN]:(state, action)=>(state, (draft)=>{
+    [LOGIN]:(state, action)=> produce(state, (draft)=>{
         draft.is_login = action.payload.boolean
     })
 }, initialState);
 
 export const actionCreators = {
     creatAccount_,
-    checkOverlapID,
+    changeWarnID,
     is_login,
-    createAccountMiddleware,
-    checkOverlapIDMiddleware,
-    loginMiddleware
+    createAccountMW,
+    checkOverlapMW,
+    loginMW
 }

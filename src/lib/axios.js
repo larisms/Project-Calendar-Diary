@@ -26,18 +26,18 @@ export const apis = {
 //   delPost: (id) => instance.delete(`/posts/${id}`),
 
 //로그인 페이지
-logIn:()=>instance.get('/login'),
+logInAX:()=>instance.get('/login'),
 
 //회원가입 페이지
-signUp:()=>instance.get('/signup'),
+signUpAX:()=>instance.get('/signup'),
 
 //회원가입 등록
-createAccount:(user)=>instance.post('/signup',user),
+createAccountAX:(user)=>instance.post('/signup',user),
 
 //회원가입시 아이디 중복
-checkOverlapID:(userID)=>instance.post('/signup/checkup',{userID}),
+checkOverlapAX:(userID)=>instance.post('/signup/checkup', {userID}),
 
 //로그인
-loginPost : (user)=>instance.post('/login',user)
+loginPostAX : (user)=>instance.post('/login',user)
 
 };
