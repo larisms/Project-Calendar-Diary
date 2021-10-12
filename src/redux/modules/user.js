@@ -73,7 +73,7 @@ const checkOverlapMW = (userID) => {
 const loginMW = (userID,PW ) => {
     return function(dispatch, getState, {history}){
         const user = {userID:userID, PW:PW}
-        apis.logInAX(user).then((res)=>{
+        apis.loginPostAX(user).then((res)=>{
             if(res.data.msg === "success"){
                 dispatch(is_login(true));
                 history.push('/');
