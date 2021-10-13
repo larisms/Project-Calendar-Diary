@@ -33,7 +33,9 @@ const Add = (props) => {
         history.push("/detail");
     }
 
-
+    const _udtContent = (id, post) => {
+        dispatchEvent(detailActions.udtContentMW(id, post))
+    }
 
     return (
         <React.Fragment>
@@ -63,6 +65,9 @@ const Add = (props) => {
             <div>
                 <button onClick={_addContent}
                 >저장하기</button>
+                <button 
+                >저장하기</button>
+
             </div>
 
         </React.Fragment>

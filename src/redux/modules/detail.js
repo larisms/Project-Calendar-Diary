@@ -8,11 +8,11 @@ const ADD_CONTENT = "ADD_CONTENT"
 const DEL_CONTENT = "DEL_CONTENT"
 const UDT_CONTENT = "UDT_CONTENT"
 
+
 const setContent = createAction(SET_CONTENT, (post_list) => ({ post_list }));
 const addContent = createAction(ADD_CONTENT, (post) => ({ post }));
 const delContent = createAction(DEL_CONTENT, (id) => ({ id }));
 const udtContent = createAction(UDT_CONTENT, (id, post) => ({id, post}));
-
 
 
 const initialState = {
@@ -58,13 +58,11 @@ const addContentMW = (post) => {
     }
 };
 
-
 const udtContentMW = (id, post) => {
     return function (dispatch, getState, {history}) {
 
     }
 }
-
 
 const delContentMW = (id) => {
     return function (dispatch, { histroy }) {
