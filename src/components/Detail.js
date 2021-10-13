@@ -16,7 +16,7 @@ const Detail = (props) => {
     const post_list = useSelector((state) => state.detail.list);
     const Detail_control = useSelector(state => state.show.detail);
 
-    const nowDate = props.nowdate;
+    const nowDate = props.nowDate;
     console.log("날짜보기프롭스", props);
     console.log("클릭날짜", nowDate);
 
