@@ -2,6 +2,7 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import _ from "lodash";
 
+import Input from "../elements/Input";
 
 import { actionCreators as signupAction } from "../redux/modules/user";
 import { signupShow, loginShow } from "../redux/modules/show";
@@ -11,7 +12,6 @@ const Signup = () => {
     const dispatch = useDispatch();
 
     //경고문 설정
-
     const [warnPW, setwarnPW] = React.useState();
     const [warnCheckPW, setwarnCheckPW] = React.useState();
 
@@ -59,15 +59,12 @@ const Signup = () => {
             setwarnPW("")
             setPassPW("success")
         }
-        
     }, 1000), [])
     
 
     //중복확인 클릭시
-
     const overlap = () => {
         dispatch(signupAction.checkOverlapMW(ID.current.value)) 
-        // setWarnID(overlapID);
     }
 
     //가입하기 버튼 클릭시
@@ -78,13 +75,14 @@ const Signup = () => {
         if (ID.current.value === "" || PW.current.value === "" || checkPW.current.value === "") {
             alert("입력창에 값을 입력해주세요!")
         } else if (PW.current.value !== checkPW.current.value) {
-            setwarnCheckPW('비밀번호가 서로 다릅니다!')
-            
-        } else if(warnID === ""){
-            alert("아이디 중복 확인을 해주세요!")
+            setwarnCheckPW('비밀번호가 서로 다릅니다!') 
+        } else if(warnID !== "사용 가능한 아이디입니다"){
+            alert("아이디 중복을 확인해주세요!")
         } else if (passID === "success" && passPW === "success" && warnID === "사용 가능한 아이디입니다"){
             //axios로 값 넘겨줌
             dispatch(signupAction.createAccountMW(ID.current.value,PW.current.value,checkPW.current.value))
+        } else {
+            alert("입력한 값들을 다시 확인해주세요.")
         }
     }
 
@@ -100,7 +98,7 @@ const Signup = () => {
                 <h1>회원가입</h1>
                 <label>
                     <p>ID</p>
-                    <input
+                    <Input
                         type="text"
                         ref={ID}
                         onChange={(e) => {
@@ -114,7 +112,7 @@ const Signup = () => {
                 </label>
                 <label>
                     <p>PW</p>
-                    <input
+                    <Input
                         type="password"
                         ref={PW}
                         onChange={(e) => {
@@ -127,7 +125,7 @@ const Signup = () => {
                 </label>
                 <label>
                     <p>PW 재확인</p>
-                    <input type="password" ref={checkPW}/>
+                    <Input type="password" ref={checkPW}/>
                     <span
                         style={{
                             color: "#ccc"

@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { signupShow, loginShow } from "../redux/modules/show";
 import { actionCreators as loginAction } from "../redux/modules/user";
+import Input from "../elements/Input";
 
 const Login = () => {
 
@@ -36,7 +37,7 @@ const Login = () => {
                 <h1>로그인</h1>
                 <label>
                     <p>ID</p>
-                    <input type="text" ref={ID} onChange={()=>{setWarnID("")}}/>
+                    <Input type="text" ref={ID} onChange={()=>{setWarnID("")}}/>
                     <span
                         style={{
                             color: "#ccc"
@@ -44,7 +45,7 @@ const Login = () => {
                 </label>
                 <label>
                     <p>PW</p>
-                    <input type="password" ref={PW} onChange={()=>{setWarnPW("")}}/>
+                    <Input type="password" ref={PW} onChange={()=>{setWarnPW("")}}/>
                     <span
                         style={{
                             color: "#ccc"
