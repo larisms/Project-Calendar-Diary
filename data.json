@@ -1,16 +1,21 @@
 {
-    "data": [
-        {
-            "id": 1,
-            "title": "테스트제목",
-            "date": "2021-10-12",
-            "color": "red"
-        },
-        {
-            "id": 2,
-            "title": "테스트제목2",
-            "date": "2021-10-13",
-            "color": "blue"
-        }
-    ]
+  "data": [
+    {
+      "id": 1,
+      "title": "테스트제목",
+      "date": "2021-10-12",
+      "color": "red"
+    },
+    {
+      "id": 2,
+      "title": "테스트제목2",
+      "date": "2021-10-13",
+      "color": "blue"
+    }
+  ],
+  "login": [
+    {
+      "msg": "success"
+    }
+  ]
 }
