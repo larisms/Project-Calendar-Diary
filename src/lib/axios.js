@@ -1,4 +1,5 @@
 import axios from "axios";
+import Main from "../pages/Main";
 
 const instance = axios.create({
   // 기본적으로 우리가 바라볼 서버의 주소

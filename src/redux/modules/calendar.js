@@ -17,10 +17,10 @@ const initialState = {
   ],
 };
 
-const setCalendarMW = () => {
+const setCalendarMW = (_today) => {
   return function (dispatch) {
     apis
-      .getPostAX()
+      .getPostAX(_today)
       .then((res) => {
         const post_list = res.data;
         dispatch(setCalendar(post_list));

@@ -8,21 +8,19 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { formatDate } from "@fullcalendar/common";
 
-import ShowModal from "../components/Modal";
 import Detail from "../components/Detail";
 import Add from "../components/Add";
 import { detailShow, addShow } from "../redux/modules/show";
 import { actionCreators as loginAction } from "../redux/modules/user";
+import { actionCreators as calendarAction } from "../redux/modules/calendar";
 
 const Main = (props) => {
   const dispatch = useDispatch();
   const Detail_control = useSelector((state) => state.show.detail);
   const Add_control = useSelector((state) => state.show.add);
-  const my_list = useSelector((state) => state.detail.list);
-  console.log(my_list);
+  const new_list = useSelector((state) => state.calendar.list);
 
   const [list, setList] = React.useState([]);
-  const [visible, setVisible] = React.useState(false);
   const [target_date, setTarget_date] = React.useState();
 
   const red_list = list.filter((event) => event.color === "#DD6262");
@@ -50,16 +48,17 @@ const Main = (props) => {
         minute: "2-digit",
       }
     );
-    console.log(_today);
-    apis
-      .getPostAX({ params: { date: _today } })
-      .then((res) => {
-        const post = res.data;
-        setList(...list, post);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    // apis
+    //   .getPostAX({ params: { date: _today } })
+    //   .then((res) => {
+    //     const post = res.data;
+    //     setList(...list, post);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
+
+    dispatch(calendarAction.setCalendarMW(_today));
   }, []);
 
   // //Modal창 열기 함수
@@ -196,7 +195,7 @@ const Main = (props) => {
             right: "today",
           }}
           titleFormat={titleFormat}
-          events={list}
+          events={new_list}
           dateClick={goToDetail}
         />
       </Container>
