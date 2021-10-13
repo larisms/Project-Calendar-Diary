@@ -45,12 +45,8 @@ const Main = (props) => {
         year: "numeric",
       }
     );
-    console.log(
-      calendarRef.current._calendarApi.currentDataManager.data.currentDate
-    );
-    console.log(_today);
-    apis
-      .getPostAX()
+    apis.apis
+      .getPostAX("http://localhost:4000/", { params: { date: _today } })
       .then((res) => {
         const post = res.data;
         setList(...list, post);
