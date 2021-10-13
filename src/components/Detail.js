@@ -13,7 +13,7 @@ const Detail = (props) => {
 
     const history = useHistory();
     const dispatch = useDispatch();
-    
+
     const post_list = useSelector((state) => state.detail.list);
 
     const nowDate = props.nowDate;
@@ -54,9 +54,17 @@ const Detail = (props) => {
                     <div>
                         <p>{p.title}</p>
                         <p>{p.content}</p>
+                        {/* <button title={p.title} onClick={(e) => {
+                            console.log("수정온클릭", e);
+                        }}>수정</button> */}
+
                         <button onClick={() => {
-                            history.replace("/add")
+                            dispatch(detailActions.udtContent(p));
+                            const _title = p.title;
+                            console.log("피피피", p);
+                            console.log("수정온클릭", p.title);
                         }}>수정</button>
+
                         <button key={p.id} onClick={() => {
                             const id = p.id;
                             _delContent(id)
@@ -67,7 +75,7 @@ const Detail = (props) => {
             })}
 
             <button onClick={goToAdd}>추가하기</button>
-            <button onClick={exitDetail}>창닫기</button>            
+            <button onClick={exitDetail}>창닫기</button>
         </React.Fragment>
     )
 };

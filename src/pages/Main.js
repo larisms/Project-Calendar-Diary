@@ -42,7 +42,7 @@ const Main = (props) => {
   //서버로 부터 데이터 받아오기
   React.useEffect(() => {
     apis
-      .getPost()
+      .getPostAX()
       .then((res) => {
         const post = res.data;
         setList(...list, post);

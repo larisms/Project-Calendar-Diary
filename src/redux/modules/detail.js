@@ -12,7 +12,7 @@ const UDT_CONTENT = "UDT_CONTENT"
 const setContent = createAction(SET_CONTENT, (post_list) => ({ post_list }));
 const addContent = createAction(ADD_CONTENT, (post) => ({ post }));
 const delContent = createAction(DEL_CONTENT, (id) => ({ id }));
-const udtContent = createAction(UDT_CONTENT, (id, post) => ({id, post}));
+const udtContent = createAction(UDT_CONTENT, (post) => ({ post }));
 
 
 const initialState = {
@@ -59,7 +59,7 @@ const addContentMW = (post) => {
 };
 
 const udtContentMW = (id, post) => {
-    return function (dispatch, getState, {history}) {
+    return function (dispatch, getState, { history }) {
 
     }
 }
@@ -91,7 +91,8 @@ export default handleActions(
         }),
 
         [UDT_CONTENT]: (state, action) => produce(state, (draft) => {
-
+            draft.list = action.payload.post
+            console.log("수정하기넘겨받는포스트", action.payload.post);
         }),
 
         [DEL_CONTENT]: (state, action) => produce(state, (draft) => {
@@ -100,7 +101,7 @@ export default handleActions(
                 return p.id === action.payload.id
             });
 
-            if (idx !== -1){
+            if (idx !== -1) {
                 draft.list.splice(idx, 1);
             }
         })
@@ -111,6 +112,7 @@ export default handleActions(
 const actionCreators = {
     setContent,
     addContent,
+    udtContent,
     addContentMW,
     setContentMW,
     udtContentMW,
