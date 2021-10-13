@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { signupShow, loginShow } from "../redux/modules/show";
 import { actionCreators as loginAction } from "../redux/modules/user";
+import Input from "../elements/Input";
 
 const Login = () => {
 
@@ -9,9 +10,8 @@ const Login = () => {
 
     const [warnID, setWarnID] = React.useState("");
     const [warnPW, setWarnPW] = React.useState("");
-
-    const ID = React.useRef();
-    const PW = React.useRef();
+    const [ID, setID] = React.useState("");
+    const [PW, setPW] = React.useState("");
 
     const goToSignup = () => {
         dispatch(loginShow(false));
@@ -19,8 +19,10 @@ const Login = () => {
     }
 
     const login = () => {
-        if(ID.current.value !== "" && PW.current.value !== ""){
-            dispatch(loginAction.loginMW(ID.current.value,PW.current.value))
+        if(ID!== "" && PW !== ""){
+            console.log("ID:::",ID);
+            console.log("PW:::",PW);
+            dispatch(loginAction.loginMW(ID,PW))
         }else if(ID.current.value === ""){
             setWarnID('아이디를 입력해주세요!');
         }else if(PW.current.value === ""){
@@ -28,7 +30,15 @@ const Login = () => {
         }
     }
 
-
+    const onChangeWarnID = (e) => {
+        setWarnID("")
+        setID(e.target.value);
+        
+    }
+    const onChangeWarnPW = (e) => {
+        setWarnPW("")
+        setPW(e.target.value);
+    }
 
     return (
         <React.Fragment>
@@ -36,7 +46,7 @@ const Login = () => {
                 <h1>로그인</h1>
                 <label>
                     <p>ID</p>
-                    <input type="text" ref={ID} onChange={()=>{setWarnID("")}}/>
+                    <Input type="text"  onChange={onChangeWarnID}/>
                     <span
                         style={{
                             color: "#ccc"
@@ -44,7 +54,7 @@ const Login = () => {
                 </label>
                 <label>
                     <p>PW</p>
-                    <input type="password" ref={PW} onChange={()=>{setWarnPW("")}}/>
+                    <Input type="password"  onChange={onChangeWarnPW}/>
                     <span
                         style={{
                             color: "#ccc"
