@@ -41,7 +41,7 @@ export const apis = {
   loginPostAX: (user) => instance.post("/login", user),
 
   //캘린더 목록 가져오기
-  getPostAX: () => instance.get("/"),
+  getPostAX: (date) => instance.get("/", date),
 
   // 게시물 불러오기
   setContentAX: () => instance.get("/diary"),

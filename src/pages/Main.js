@@ -45,8 +45,8 @@ const Main = (props) => {
         year: "numeric",
       }
     );
-    apis.apis
-      .getPostAX("http://localhost:4000/", { params: { date: _today } })
+    apis
+      .getPostAX({ params: { date: _today } })
       .then((res) => {
         const post = res.data;
         setList(...list, post);
@@ -85,7 +85,7 @@ const Main = (props) => {
       }
     );
     console.log(now_month);
-    apis.getPostAX("http://localhost:4000/", { params: { date: now_month } });
+    apis.getPostAX({ params: { date: now_month } });
   };
   //캘린더 익월로 이동하기 버튼
   const NextButton = () => {
@@ -101,7 +101,7 @@ const Main = (props) => {
       }
     );
     console.log(now_month);
-    apis.getPostAX("http://localhost:4000/", { params: { date: now_month } });
+    apis.getPostAX({ params: { date: now_month } });
   };
 
   return (
