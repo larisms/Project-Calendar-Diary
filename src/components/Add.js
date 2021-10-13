@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
@@ -12,9 +12,21 @@ const Add = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const [title, setTitle] = React.useState();
-    const [content, setContent] = React.useState();
+
+    const editPost = useSelector((state) => {
+        console.log(state.detail)
+        return state.detail.editList
+    });
+    const is_edit = editPost.id ? true : false;
+    // console.log("편집데이터가져오기", editPost);
+    // console.log("이즈에딧확인하기", is_edit);
+
+    const [editId, setEditId] = React.useState(editPost.id ? editPost.id : "")
+    const [title, setTitle] = React.useState(is_edit ? editPost.title : "");
+    const [content, setContent] = React.useState(is_edit ? editPost.content : "");
     const [color, setColor] = React.useState();
+    // const [editTitle, setEditTitle] = React.useState(is_edit? editPost.title : "");
+    // const [editContent, setEditContent] = React.useState(is_edit? editPost.content : "");
 
     const nowDate = props.nowDate;
 
@@ -31,7 +43,6 @@ const Add = (props) => {
         content: content,
         color: color,
     }
-    console.log(post)
 
 
     const _addContent = () => {
@@ -41,8 +52,11 @@ const Add = (props) => {
         dispatch(addShow(false));
     }
 
-    const _udtContent = (id, post) => {
-        dispatchEvent(detailActions.udtContentMW(id, post))
+    const _udtContent = () => {
+        dispatch(detailActions.udtContentMW(post))
+        window.alert("수정완료");
+        dispatch(detailShow(true));
+        dispatch(addShow(false));  
     }
 
     const clickColor = (e) => {
@@ -55,6 +69,7 @@ const Add = (props) => {
             <p>{nowDate}</p>
             <div>
                 <input
+                    value={title}
                     onChange={changeTitle}
                     type="text"
                     placeholder="제목을 입력해주세요"
@@ -62,6 +77,7 @@ const Add = (props) => {
             </div>
             <div>
                 <textarea
+                    value={content}
                     onChange={changeContent}
                     type="text"
                     placeholder="내용을 입력해주세요"
@@ -76,11 +92,11 @@ const Add = (props) => {
                 <ColorButton color="#9F70BC" onClick={clickColor}></ColorButton>
             </div>
             <div>
-                <button onClick={_addContent}
-                >저장하기</button>
-                <button onClick={()=>{console.log(post)}}
-                >저장하기</button>
-
+                {is_edit ? (
+                    <button onClick={_udtContent}>수정하기</button>
+                ) : (
+                    <button onClick={_addContent}>저장하기</button>
+                )}
             </div>
 
         </React.Fragment>
@@ -90,7 +106,7 @@ const Add = (props) => {
 const ColorButton = styled.button`
 width:25px;
 height:25px;
-background-color: ${(props)=>props.color};
+background-color: ${(props) => props.color};
 `
 
 export default Add;

@@ -29,7 +29,7 @@ const Detail = (props) => {
 
     React.useEffect(() => {
         dispatch(detailActions.setContentMW());
-    }, []);
+    }, [dispatch]);
 
     const _delContent = (id) => {
         dispatch(detailActions.delContentMW(id));
@@ -59,7 +59,8 @@ const Detail = (props) => {
                         }}>수정</button> */}
 
                         <button onClick={() => {
-                            dispatch(detailActions.udtContent(p));
+                            dispatch(detailActions.editContent(p));
+                            goToAdd();
                             const _title = p.title;
                             console.log("피피피", p);
                             console.log("수정온클릭", p.title);

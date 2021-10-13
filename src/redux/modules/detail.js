@@ -5,21 +5,23 @@ import { apis } from "../../lib/axios";
 
 const SET_CONTENT = "SET_CONTENT"
 const ADD_CONTENT = "ADD_CONTENT"
-const DEL_CONTENT = "DEL_CONTENT"
+const EDIT_CONTENT = "EDIT_CONTENT"
 const UDT_CONTENT = "UDT_CONTENT"
+const DEL_CONTENT = "DEL_CONTENT"
+
 
 
 const setContent = createAction(SET_CONTENT, (post_list) => ({ post_list }));
 const addContent = createAction(ADD_CONTENT, (post) => ({ post }));
-const delContent = createAction(DEL_CONTENT, (id) => ({ id }));
+const editContent = createAction(EDIT_CONTENT, (post) => ({ post }));
 const udtContent = createAction(UDT_CONTENT, (post) => ({ post }));
+const delContent = createAction(DEL_CONTENT, (id) => ({ id }));
+
 
 
 const initialState = {
-    list: [{
-        title: "first title",
-        content: "first content",
-    }],
+    list: [{}],
+    editList: []
 };
 
 const initialPost = {
@@ -58,9 +60,17 @@ const addContentMW = (post) => {
     }
 };
 
-const udtContentMW = (id, post) => {
+const udtContentMW = (post) => {
     return function (dispatch, getState, { history }) {
-
+        console.log("수정데이터미들웨어에받기", post)
+        apis
+            .udtContentAX(post)
+            .then(() => {
+                dispatch(udtContent(post));
+            })
+            .catch((err) => {
+                console.log("업데이트에러", err)
+            })
     }
 }
 
@@ -90,9 +100,15 @@ export default handleActions(
             draft.list.push(action.payload.post)
         }),
 
-        [UDT_CONTENT]: (state, action) => produce(state, (draft) => {
-            draft.list = action.payload.post
+        [EDIT_CONTENT]: (state, action) => produce(state, (draft) => {
+            draft.editList = action.payload.post;
+            console.log("수정하기에디트리스트", draft.editList);
             console.log("수정하기넘겨받는포스트", action.payload.post);
+        }),
+
+        [UDT_CONTENT]: (state, action) => produce(state, (draft) => {
+            draft.list.push(action.payload.post)
+            draft.editList = []
         }),
 
         [DEL_CONTENT]: (state, action) => produce(state, (draft) => {
@@ -112,7 +128,7 @@ export default handleActions(
 const actionCreators = {
     setContent,
     addContent,
-    udtContent,
+    editContent,
     addContentMW,
     setContentMW,
     udtContentMW,
