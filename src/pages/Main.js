@@ -12,11 +12,9 @@ import Detail from "../components/Detail";
 import { detailShow } from "../redux/modules/show";
 import { actionCreators as loginAction } from "../redux/modules/user";
 
-
 const Main = (props) => {
-
   const dispatch = useDispatch();
-  const Detail_control = useSelector(state => state.show.detail);
+  const Detail_control = useSelector((state) => state.show.detail);
 
   const [list, setList] = React.useState([]);
   const [visible, setVisible] = React.useState(false);
@@ -32,10 +30,9 @@ const Main = (props) => {
   const goToDetail = (info) => {
     dispatch(detailShow(true));
     setTarget_date(info.dateStr);
-};
+  };
 
   console.log(red_list);
-
 
   //서버로 부터 데이터 받아오기
   React.useEffect(() => {
@@ -64,10 +61,12 @@ const Main = (props) => {
     month: "long",
   };
 
-
   return (
     <React.Fragment>
-      {Detail_control? <Detail nowDate={target_date}/> : null}
+      <ModalBG>
+        {Detail_control ? <Detail nowDate={target_date} /> : null}
+      </ModalBG>
+
       <Container>
         <ButtonArea>
           <Button
@@ -149,7 +148,6 @@ const Main = (props) => {
   );
 };
 
-
 const Container = styled.div`
   height: 100%;
   width: 90%;
@@ -187,5 +185,23 @@ const ButtonArea = styled.div`
   left: 200px;
 `;
 
+const ModalBG = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80vw;
+  max-width: 700px;
+  height: 70vh;
+  padding: 30px;
+  background-color: white;
+  z-index: 30;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
+`;
 
 export default Main;
