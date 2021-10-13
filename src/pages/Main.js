@@ -34,7 +34,7 @@ const Main = (props) => {
   const goToDetail = (info) => {
     dispatch(detailShow(true));
     setTarget_date(info.dateStr);
-};
+  };
 
   console.log(red_list);
 
@@ -69,8 +69,8 @@ const Main = (props) => {
 
   return (
     <React.Fragment>
-      {Detail_control? <Detail nowDate={target_date}/> : null}
-      {Add_control? <Add nowDate={target_date}/> : null}
+      {Detail_control ? <Detail nowDate={target_date} /> : null}
+      {Add_control ? <Add nowDate={target_date} /> : null}
       <Container>
         <ButtonArea>
           <Button

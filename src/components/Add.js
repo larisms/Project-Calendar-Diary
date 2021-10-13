@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 
 import { actionCreators as detailActions } from "../redux/modules/detail";
+import { addShow, detailShow } from "../redux/modules/show";
 
 
 const Add = (props) => {
@@ -15,6 +16,8 @@ const Add = (props) => {
     const [content, setContent] = React.useState();
     const [color, setColor] = React.useState();
 
+    const nowDate = props.nowDate;
+
     const changeTitle = (e) => {
         setTitle(e.target.value);
     }
@@ -23,9 +26,10 @@ const Add = (props) => {
     }
 
     const post = {
+        date: nowDate,
         title: title,
         content: content,
-        color:color,
+        color: color,
     }
     console.log(post)
 
@@ -33,7 +37,8 @@ const Add = (props) => {
     const _addContent = () => {
         dispatch(detailActions.addContentMW(post))
         window.alert("저장완료");
-        history.push("/detail");
+        dispatch(detailShow(true));
+        dispatch(addShow(false));
     }
 
     const _udtContent = (id, post) => {
@@ -47,7 +52,7 @@ const Add = (props) => {
 
     return (
         <React.Fragment>
-            날짜
+            <p>{nowDate}</p>
             <div>
                 <input
                     onChange={changeTitle}
@@ -83,11 +88,9 @@ const Add = (props) => {
 }
 
 const ColorButton = styled.button`
-
 width:25px;
 height:25px;
 background-color: ${(props)=>props.color};
-
 `
 
 export default Add;
