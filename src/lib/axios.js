@@ -54,5 +54,4 @@ export const apis = {
 
   // 게시물 삭제하기
   delContentAX: (id) => instance.delete(`/diary/${id}`),
-
 };

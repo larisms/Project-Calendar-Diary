@@ -9,23 +9,26 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 import ShowModal from "../components/Modal";
 import Detail from "../components/Detail";
-import { detailShow } from "../redux/modules/show";
+import Add from "../components/Add";
+import { detailShow, addShow } from "../redux/modules/show";
 import { actionCreators as loginAction } from "../redux/modules/user";
+import { formatDate } from "@fullcalendar/common";
 
 const Main = (props) => {
   const dispatch = useDispatch();
   const Detail_control = useSelector((state) => state.show.detail);
+  const Add_control = useSelector((state) => state.show.add);
 
   const [list, setList] = React.useState([]);
   const [visible, setVisible] = React.useState(false);
   const [target_date, setTarget_date] = React.useState();
 
-  const red_list = list.filter((event) => event.color === "red");
-  const brown_list = list.filter((event) => event.color === "brown");
-  const green_list = list.filter((event) => event.color === "red");
-  const blue_list = list.filter((event) => event.color === "blue");
-  const gray_list = list.filter((event) => event.color === "gray");
-  const purple_list = list.filter((event) => event.color === "purple");
+  const red_list = list.filter((event) => event.color === "#DD6262");
+  const brown_list = list.filter((event) => event.color === "#B07255");
+  const green_list = list.filter((event) => event.color === "#6C9D68");
+  const blue_list = list.filter((event) => event.color === "#6A96B8");
+  const gray_list = list.filter((event) => event.color === "#818D90");
+  const purple_list = list.filter((event) => event.color === "#9F70BC");
 
   const goToDetail = (info) => {
     dispatch(detailShow(true));
@@ -61,19 +64,54 @@ const Main = (props) => {
     month: "long",
   };
 
+  //캘린더 전월로 이동하기 버튼
+  const calendarRef = React.useRef();
+  const PrevButton = () => {
+    let calendarApi = calendarRef.current.getApi();
+    calendarApi.prev();
+    const now_month = formatDate(
+      calendarApi.currentDataManager.data.currentDate,
+      {
+        titleFormat: "ISO8601",
+        month: "2-digit",
+        day: "2-digit",
+        year: "numeric",
+      }
+    );
+    console.log(now_month);
+  };
+  //캘린더 익월로 이동하기 버튼
+  const NextButton = () => {
+    let calendarApi = calendarRef.current.getApi();
+    calendarApi.next();
+    const now_month = formatDate(
+      calendarApi.currentDataManager.data.currentDate,
+      {
+        titleFormat: "ISO8601",
+        month: "2-digit",
+        day: "2-digit",
+        year: "numeric",
+      }
+    );
+    console.log(now_month);
+  };
+
   return (
     <React.Fragment>
-      <ModalBG>
-        {Detail_control ? <Detail nowDate={target_date} /> : null}
-      </ModalBG>
-
+      {Detail_control ? <Detail nowDate={target_date} /> : null}
+      {Add_control ? <Add nowDate={target_date} /> : null}
       <Container>
+        <MonthMove>
+          <button onClick={PrevButton}>{String("<")}</button>
+
+          <button onClick={NextButton}>{String(">")}</button>
+        </MonthMove>
         <ButtonArea>
           <Button
             className=""
             tagColor={"#DD6262"}
             style={{
-              background: "red",
+              background: "#DD6262",
             }}
             onClick={() => {
               setList(red_list);
@@ -83,7 +121,7 @@ const Main = (props) => {
             className=""
             tagColor={"#B07255"}
             style={{
-              background: "brown",
+              background: "#B07255",
             }}
             onClick={() => {
               setList(brown_list);
@@ -93,7 +131,7 @@ const Main = (props) => {
             className=""
             tagColor={"#6C9D68"}
             style={{
-              background: "green",
+              background: "#6C9D68",
             }}
             onClick={() => {
               setList(green_list);
@@ -103,7 +141,7 @@ const Main = (props) => {
             className=""
             tagColor={"#6A96B8"}
             style={{
-              background: "blue",
+              background: "#6A96B8",
             }}
             onClick={() => {
               setList(blue_list);
@@ -113,7 +151,7 @@ const Main = (props) => {
             className=""
             tagColor={"#818D90"}
             style={{
-              background: "gray",
+              background: "#818D90",
             }}
             onClick={() => {
               setList(gray_list);
@@ -123,7 +161,7 @@ const Main = (props) => {
             className=""
             tagColor={"#9F70BC"}
             style={{
-              background: "purple",
+              background: "#9F70BC",
             }}
             onClick={() => {
               setList(purple_list);
@@ -131,13 +169,14 @@ const Main = (props) => {
           ></Button>
         </ButtonArea>
         <FullCalendar
+          ref={calendarRef}
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
           locale="ko"
           headerToolbar={{
-            left: "today",
+            left: "",
             center: "title",
-            right: "prev,next",
+            right: "today",
           }}
           titleFormat={titleFormat}
           events={list}
@@ -181,27 +220,34 @@ const Button = styled.div`
 const ButtonArea = styled.div`
   position: absolute;
   display: flex;
-  top: 55px;
-  left: 200px;
+  top: 6%;
+  left: 5%;
 `;
 
-const ModalBG = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 80vw;
-  max-width: 700px;
-  height: 70vh;
-  padding: 30px;
-  background-color: white;
-  z-index: 30;
-  transform: translate(-50%, -50%);
+const MonthMove = styled.div`
+  width: 300px;
+  height: 60px;
+  /* height: 154px; */
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  border-radius: 20px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
-`;
+  position: absolute;
+  top: 4%;
+  left: 48.5%;
+  margin-left: -160px;
 
+  @media only screen and (max-width: 680px) {
+  }
+  button {
+    font-size: 3rem;
+    border: none;
+    background: none;
+    color: black;
+    height: 60px;
+    line-height: 60px;
+    &:hover {
+      color: #ffde00;
+    }
+  }
+`;
 export default Main;

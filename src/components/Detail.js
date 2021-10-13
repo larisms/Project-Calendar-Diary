@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
 import { actionCreators as detailActions } from "../redux/modules/detail";
-import { detailShow } from "../redux/modules/show";
+import { detailShow, addShow } from "../redux/modules/show";
 
 const Detail = (props) => {
   // const { date } = props;
@@ -36,6 +36,11 @@ const Detail = (props) => {
     dispatch(detailShow(false));
   };
 
+  const goToAdd = () => {
+    dispatch(detailShow(false));
+    dispatch(addShow(true));
+  };
+
   return (
     <React.Fragment>
       <p>{nowDate}</p>
@@ -65,13 +70,7 @@ const Detail = (props) => {
         );
       })}
 
-      <button
-        onClick={() => {
-          history.replace("/add");
-        }}
-      >
-        추가하기
-      </button>
+      <button onClick={goToAdd}>추가하기</button>
       <button onClick={exitDetail}>창닫기</button>
     </React.Fragment>
   );
