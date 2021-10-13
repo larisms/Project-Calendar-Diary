@@ -51,19 +51,7 @@ const Main = (props) => {
               background: "red",
             }}
             onClick={() => {
-              <FullCalendar
-                plugins={[dayGridPlugin, interactionPlugin]}
-                initialView="dayGridMonth"
-                locale="ko"
-                headerToolbar={{
-                  left: "today",
-                  center: "title",
-                  right: "prev,next",
-                }}
-                titleFormat={titleFormat}
-                events={red_list}
-                dateClick={modalOpen}
-              />;
+              setList(red_list);
             }}
           ></Button>
           <Button
