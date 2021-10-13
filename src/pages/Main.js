@@ -10,9 +10,8 @@ import interactionPlugin from "@fullcalendar/interaction";
 import ShowModal from "../components/Modal";
 import Detail from "../components/Detail";
 import Add from "../components/Add";
-import { detailShow } from "../redux/modules/show";
+import { detailShow, addShow } from "../redux/modules/show";
 import { actionCreators as loginAction } from "../redux/modules/user";
-
 
 
 const Main = (props) => {

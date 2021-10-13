@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { actionCreators as detailActions } from "../redux/modules/detail";
 import { addShow, detailShow } from "../redux/modules/show";
 
+
 const Add = (props) => {
 
     const history = useHistory();
