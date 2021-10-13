@@ -11,9 +11,14 @@ const Signup = () => {
     const dispatch = useDispatch();
 
     //경고문 설정
-    // const [warnID, setWarnID] = React.useState();
+
     const [warnPW, setwarnPW] = React.useState();
     const [warnCheckPW, setwarnCheckPW] = React.useState();
+
+    //입력된 값의 통과 여부
+    //fail:통과하지 못함, success 통과
+    const [passID, setPassID] = React.useState('fail'); 
+    const [passPW, setPassPW] = React.useState('fail');
 
     const warnID = useSelector(state => state.user.warnID);
 
@@ -28,26 +33,35 @@ const Signup = () => {
         var eng = /^[a-zA-Z]*$/;
         if (!eng.test(value)) {
             dispatch(signupAction.changeWarnID("영어만 입력해주세요"))
+            setPassID('fail')
         } else if (value.length < 4){
             dispatch(signupAction.changeWarnID("4자 이상 입력해주세요"))
+            setPassID('fail')
         } 
         else {
-            dispatch(signupAction.changeWarnID(""))
+            dispatch(signupAction.changeWarnID(""));
+            setPassID("success")
         }
+        
     }, 1000), [])
+    
 
     const valuePW = React.useCallback(_.debounce((e) => {
         const value = e.target.value;
         if (value.length < 4) {
             setwarnPW("4자 이상 입력해주세요")
+            setPassPW("fail")
         } else if(value.indexOf(ID.current.value) !== -1){
             setwarnPW("아이디와 다르게 입력해주세요")
+            setPassPW("fail")
         }
         else {
             setwarnPW("")
+            setPassPW("success")
         }
+        
     }, 1000), [])
-
+    
 
     //중복확인 클릭시
 
@@ -58,12 +72,17 @@ const Signup = () => {
 
     //가입하기 버튼 클릭시
     const signup = () => {
+        console.log("ID success? :::",passID);
+        console.log("PW success? :::",passPW);
         //회원가입 절차
         if (ID.current.value === "" || PW.current.value === "" || checkPW.current.value === "") {
             alert("입력창에 값을 입력해주세요!")
         } else if (PW.current.value !== checkPW.current.value) {
             setwarnCheckPW('비밀번호가 서로 다릅니다!')
-        } else {
+            
+        } else if(warnID === ""){
+            alert("아이디 중복 확인을 해주세요!")
+        } else if (passID === "success" && passPW === "success" && warnID === "사용 가능한 아이디입니다"){
             //axios로 값 넘겨줌
             dispatch(signupAction.createAccountMW(ID.current.value,PW.current.value,checkPW.current.value))
         }
