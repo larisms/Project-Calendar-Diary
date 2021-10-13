@@ -11,6 +11,12 @@ const Main = (props) => {
   const [visible, setVisible] = React.useState(false);
   const [target_date, setTarget_date] = React.useState();
   let red_list = list.filter((event) => event.color === "red");
+  let brown_list = list.filter((event) => event.color === "brown");
+  let green_list = list.filter((event) => event.color === "red");
+  let blue_list = list.filter((event) => event.color === "blue");
+  let gray_list = list.filter((event) => event.color === "gray");
+  let purple_list = list.filter((event) => event.color === "purple");
+
   console.log(red_list);
 
   //서버로 부터 데이터 받아오기
@@ -46,7 +52,7 @@ const Main = (props) => {
         <ButtonArea>
           <Button
             className=""
-            tagColor={"red"}
+            tagColor={"#DD6262"}
             style={{
               background: "red",
             }}
@@ -56,9 +62,52 @@ const Main = (props) => {
           ></Button>
           <Button
             className=""
-            tagColor={"#C05AFF"}
+            tagColor={"#B07255"}
+            style={{
+              background: "brown",
+            }}
+            onClick={() => {
+              setList(brown_list);
+            }}
+          ></Button>
+          <Button
+            className=""
+            tagColor={"#6C9D68"}
+            style={{
+              background: "green",
+            }}
+            onClick={() => {
+              setList(green_list);
+            }}
+          ></Button>
+          <Button
+            className=""
+            tagColor={"#6A96B8"}
             style={{
               background: "blue",
+            }}
+            onClick={() => {
+              setList(blue_list);
+            }}
+          ></Button>
+          <Button
+            className=""
+            tagColor={"#818D90"}
+            style={{
+              background: "gray",
+            }}
+            onClick={() => {
+              setList(gray_list);
+            }}
+          ></Button>
+          <Button
+            className=""
+            tagColor={"#9F70BC"}
+            style={{
+              background: "purple",
+            }}
+            onClick={() => {
+              setList(purple_list);
             }}
           ></Button>
         </ButtonArea>
