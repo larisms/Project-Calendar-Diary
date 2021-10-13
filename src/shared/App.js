@@ -10,13 +10,16 @@ import {apis} from "../lib/axios"
 
 
 function App() {
-
+  const [is_login, setstate] = React.useState('false');
+  
   React.useEffect(()=>{
     apis.logInAX().then((res)=>{
       if(res.data.msg === "success"){
+          setstate(true);
           history.push('/');
       }else{
-        history.push('/login');
+          setstate(false);
+          history.push('/login');
       }
   })
   },[])
@@ -24,8 +27,7 @@ function App() {
   return (
 
     <ConnectedRouter history={history}>
-      <Route path="/login" exact component={User}/>
-      <Route path="/" exact component={Main}/>
+      {is_login? <Route path="/" exact component={Main}/>:<Route path="/login" exact component={User}/>}
     </ConnectedRouter>
   );
 }

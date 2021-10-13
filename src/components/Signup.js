@@ -4,6 +4,7 @@ import _ from "lodash";
 
 
 import { actionCreators as signupAction } from "../redux/modules/user";
+import { signupShow, loginShow } from "../redux/modules/show";
 
 const Signup = () => {
 
@@ -68,9 +69,15 @@ const Signup = () => {
         }
     }
 
+    const goBackToLogin = () => {
+        dispatch(signupShow(false));
+        dispatch(loginShow(true));
+    }
+
     return (
         <React.Fragment>
             <section>
+                <button onClick={goBackToLogin}>뒤로가기</button>
                 <h1>회원가입</h1>
                 <label>
                     <p>ID</p>
