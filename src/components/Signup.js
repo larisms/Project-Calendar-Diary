@@ -22,10 +22,14 @@ const Signup = () => {
 
     const warnID = useSelector(state => state.user.warnID);
 
-    //입력이 끝난 input 값
-    const ID = React.useRef();
-    const PW = React.useRef();
-    const checkPW = React.useRef();
+    //input 값
+    // const ID = React.useRef();
+    // const PW = React.useRef();
+    // const checkPW = React.useRef();
+    const [ID, setID] = React.useState();
+    const [PW, setPW] = React.useState();
+    const [confirmPW, setConfirmPW] = React.useState();
+
 
     //경고문 변화 1초단위로 감지
     const valueID = React.useCallback(_.debounce((e) => {
@@ -42,45 +46,63 @@ const Signup = () => {
             dispatch(signupAction.changeWarnID(""));
             setPassID("success")
         }
-        
     }, 1000), [])
     
 
     const valuePW = React.useCallback(_.debounce((e) => {
         const value = e.target.value;
+        console.log("checkID:::",ID)
         if (value.length < 4) {
             setwarnPW("4자 이상 입력해주세요")
             setPassPW("fail")
-        } else if(value.indexOf(ID.current.value) !== -1){
+        } else if(value.indexOf(ID) !== -1){
+            
             setwarnPW("아이디와 다르게 입력해주세요")
             setPassPW("fail")
+
         }
         else {
             setwarnPW("")
             setPassPW("success")
         }
-    }, 1000), [])
+    }, 1000), [ID])
+
+    const onChangeID = (e) => {
+        valueID(e);
+        setID(e.target.value);
+    }
+    const onChangePW = (e) => {
+        console.log(ID);
+        valuePW(e);
+        setPW(e.target.value);
+        
+    }
+    const onChangeConfirmPW = (e) => {
+        setConfirmPW(e.target.value);
+    }
     
 
     //중복확인 클릭시
     const overlap = () => {
-        dispatch(signupAction.checkOverlapMW(ID.current.value)) 
+        console.log("overlap ID :::", ID);
+        dispatch(signupAction.checkOverlapMW(ID)) 
     }
 
     //가입하기 버튼 클릭시
     const signup = () => {
+        console.log(ID);
         console.log("ID success? :::",passID);
         console.log("PW success? :::",passPW);
         //회원가입 절차
-        if (ID.current.value === "" || PW.current.value === "" || checkPW.current.value === "") {
+        if (ID === "" || PW === "" || confirmPW === "") {
             alert("입력창에 값을 입력해주세요!")
-        } else if (PW.current.value !== checkPW.current.value) {
+        } else if (PW !== confirmPW) {
             setwarnCheckPW('비밀번호가 서로 다릅니다!') 
         } else if(warnID !== "사용 가능한 아이디입니다"){
             alert("아이디 중복을 확인해주세요!")
         } else if (passID === "success" && passPW === "success" && warnID === "사용 가능한 아이디입니다"){
             //axios로 값 넘겨줌
-            dispatch(signupAction.createAccountMW(ID.current.value,PW.current.value,checkPW.current.value))
+            dispatch(signupAction.createAccountMW(ID,PW,confirmPW))
         } else {
             alert("입력한 값들을 다시 확인해주세요.")
         }
@@ -100,10 +122,8 @@ const Signup = () => {
                     <p>ID</p>
                     <Input
                         type="text"
-                        ref={ID}
-                        onChange={(e) => {
-                            valueID(e)
-                        }}/>
+                       
+                        onChange={onChangeID}/>
                     <button onClick={overlap}>중복확인</button>
                     <span
                         style={{
@@ -114,10 +134,8 @@ const Signup = () => {
                     <p>PW</p>
                     <Input
                         type="password"
-                        ref={PW}
-                        onChange={(e) => {
-                            valuePW(e)
-                        }}/>
+                        
+                        onChange={onChangePW}/>
                     <span
                         style={{
                             color: "#ccc"
@@ -125,7 +143,7 @@ const Signup = () => {
                 </label>
                 <label>
                     <p>PW 재확인</p>
-                    <Input type="password" ref={checkPW}/>
+                    <Input type="password" onChange={onChangeConfirmPW}/>
                     <span
                         style={{
                             color: "#ccc"
