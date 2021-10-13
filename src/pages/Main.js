@@ -1,27 +1,44 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import { apis } from "../lib/axios";
+
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+
 import ShowModal from "../components/Modal";
-import styled from "styled-components";
-import { apis } from "../lib/axios";
 import Detail from "../components/Detail";
+import { detailShow } from "../redux/modules/show";
+import { actionCreators as loginAction } from "../redux/modules/user";
+
 
 const Main = (props) => {
+
+  const dispatch = useDispatch();
+  const Detail_control = useSelector(state => state.show.detail);
+
   const [list, setList] = React.useState([]);
   const [visible, setVisible] = React.useState(false);
   const [target_date, setTarget_date] = React.useState();
-  let red_list = list.filter((event) => event.color === "red");
-  let brown_list = list.filter((event) => event.color === "brown");
-  let green_list = list.filter((event) => event.color === "red");
-  let blue_list = list.filter((event) => event.color === "blue");
-  let gray_list = list.filter((event) => event.color === "gray");
-  let purple_list = list.filter((event) => event.color === "purple");
+
+  const red_list = list.filter((event) => event.color === "red");
+  const brown_list = list.filter((event) => event.color === "brown");
+  const green_list = list.filter((event) => event.color === "red");
+  const blue_list = list.filter((event) => event.color === "blue");
+  const gray_list = list.filter((event) => event.color === "gray");
+  const purple_list = list.filter((event) => event.color === "purple");
+
+  const goToDetail = (info) => {
+    dispatch(detailShow(true));
+    setTarget_date(info.dateStr);
+};
 
   console.log(red_list);
 
+
   //서버로 부터 데이터 받아오기
-  useEffect(() => {
+  React.useEffect(() => {
     apis
       .getPost()
       .then((res) => {
@@ -47,9 +64,10 @@ const Main = (props) => {
     month: "long",
   };
 
+
   return (
     <React.Fragment>
-      <Detail/>
+      {Detail_control? <Detail nowDate={target_date}/> : null}
       <Container>
         <ButtonArea>
           <Button
@@ -124,13 +142,13 @@ const Main = (props) => {
           }}
           titleFormat={titleFormat}
           events={list}
-          dateClick={modalOpen}
+          dateClick={goToDetail}
         />
       </Container>
-      
     </React.Fragment>
   );
 };
+
 
 const Container = styled.div`
   height: 100%;
@@ -168,4 +186,6 @@ const ButtonArea = styled.div`
   top: 55px;
   left: 200px;
 `;
+
+
 export default Main;

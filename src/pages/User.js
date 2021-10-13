@@ -5,7 +5,7 @@ import Login from "../components/Login";
 import Signup from "../components/Signup"
 
 
-const Signin =()=>{
+const User =()=>{
     
     const Login_control = useSelector(state => state.show.login);
     const Signup_control = useSelector(state => state.show.signup);
@@ -21,4 +21,4 @@ const Signin =()=>{
     )
 }
 
-export default Signin;
+export default User;
