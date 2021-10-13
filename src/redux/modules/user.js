@@ -15,6 +15,7 @@ const initialState = {
         }
     ],
     warnID: "",
+    
 }
 
 const CREATE_ACCOUNT = "CREATE_ACCOUNT";

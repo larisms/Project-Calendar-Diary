@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
 import { actionCreators as detailActions } from "../redux/modules/detail";
-import { detailShow, addShow } from "../redux/modules/show";
+import { addShow, detailShow } from "../redux/modules/show";
+import Add from "./Add";
 
 const Detail = (props) => {
   // const { date } = props;
@@ -12,7 +13,6 @@ const Detail = (props) => {
   const dispatch = useDispatch();
 
   const post_list = useSelector((state) => state.detail.list);
-  const Detail_control = useSelector((state) => state.show.detail);
 
   const nowDate = props.nowDate;
   console.log("날짜보기프롭스", props);

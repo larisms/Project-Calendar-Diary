@@ -6,13 +6,13 @@ import { apis } from "../lib/axios";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import { formatDate } from "@fullcalendar/common";
 
 import ShowModal from "../components/Modal";
 import Detail from "../components/Detail";
 import Add from "../components/Add";
 import { detailShow, addShow } from "../redux/modules/show";
 import { actionCreators as loginAction } from "../redux/modules/user";
-import { formatDate } from "@fullcalendar/common";
 
 const Main = (props) => {
   const dispatch = useDispatch();
@@ -35,12 +35,22 @@ const Main = (props) => {
     setTarget_date(info.dateStr);
   };
 
-  console.log(red_list);
-
   //서버로 부터 데이터 받아오기
   React.useEffect(() => {
+    const _today = formatDate(
+      calendarRef.current._calendarApi.currentDataManager.data.currentDate,
+      {
+        month: "2-digit",
+        day: "2-digit",
+        year: "numeric",
+      }
+    );
+    console.log(
+      calendarRef.current._calendarApi.currentDataManager.data.currentDate
+    );
+    console.log(_today);
     apis
-      .getPost()
+      .getPostAX()
       .then((res) => {
         const post = res.data;
         setList(...list, post);
@@ -50,13 +60,13 @@ const Main = (props) => {
       });
   }, []);
 
-  //Modal창 열기 함수
-  const modalOpen = (info) => {
-    setTarget_date(info.dateStr);
-    console.log(target_date);
-    setVisible(true);
-    apis.getPost("http://localhost:4000/?date=target_date");
-  };
+  // //Modal창 열기 함수
+  // const modalOpen = (info) => {
+  //   setTarget_date(info.dateStr);
+  //   console.log(target_date);
+  //   setVisible(true);
+  //   apis.getPost("http://localhost:4000/?date=target_date");
+  // };
 
   //캘린더 제목 설정
   const titleFormat = {
@@ -79,6 +89,7 @@ const Main = (props) => {
       }
     );
     console.log(now_month);
+    apis.getPostAX("http://localhost:4000/", { params: { date: now_month } });
   };
   //캘린더 익월로 이동하기 버튼
   const NextButton = () => {
@@ -94,6 +105,7 @@ const Main = (props) => {
       }
     );
     console.log(now_month);
+    apis.getPostAX("http://localhost:4000/", { params: { date: now_month } });
   };
 
   return (
@@ -103,7 +115,6 @@ const Main = (props) => {
       <Container>
         <MonthMove>
           <button onClick={PrevButton}>{String("<")}</button>
-
           <button onClick={NextButton}>{String(">")}</button>
         </MonthMove>
         <ButtonArea>
