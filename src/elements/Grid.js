@@ -3,13 +3,13 @@ import styled from "styled-components";
 
 const Grid = (props) => {
 
-    const { is_flex, width, margin, padding, bg, children } = props;
+    const { display, width, margin, padding, backGround, children } = props;
     const styles = {
-        is_flex: is_flex,
+        display: display,
         width: width,
         margin: margin,
         padding: padding,
-        bg: bg,
+        backGround: backGround,
     };
 
     return (
@@ -19,15 +19,19 @@ const Grid = (props) => {
 
 
 Grid.defaultProps = {
-    is_flex:false,
+    display:"block",
     width:"100%",
     margin:0,
     padding:0,
-    background:false,
+    backGround:"none",
 }
 
 const StyledGrid = styled.div`
-
+display: ${(props)=>props.display};;
+width: ${(props)=>props.width};
+margin: ${(props)=>props.margin};
+padding: ${(props)=>props.padding};
+background: ${(props)=>props.backGround};
 
 `;
 
