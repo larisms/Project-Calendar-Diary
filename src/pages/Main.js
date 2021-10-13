@@ -18,6 +18,8 @@ const Main = (props) => {
   const dispatch = useDispatch();
   const Detail_control = useSelector((state) => state.show.detail);
   const Add_control = useSelector((state) => state.show.add);
+  const my_list = useSelector((state) => state.detail.list);
+  console.log(my_list);
 
   const [list, setList] = React.useState([]);
   const [visible, setVisible] = React.useState(false);
@@ -40,11 +42,15 @@ const Main = (props) => {
     const _today = formatDate(
       calendarRef.current._calendarApi.currentDataManager.data.currentDate,
       {
+        timeZone: "Asia/Seoul",
         month: "2-digit",
         day: "2-digit",
         year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
       }
     );
+    console.log(_today);
     apis
       .getPostAX({ params: { date: _today } })
       .then((res) => {
@@ -78,10 +84,12 @@ const Main = (props) => {
     const now_month = formatDate(
       calendarApi.currentDataManager.data.currentDate,
       {
-        titleFormat: "ISO8601",
+        timeZone: "Asia/Seoul",
         month: "2-digit",
         day: "2-digit",
         year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
       }
     );
     console.log(now_month);
@@ -94,10 +102,12 @@ const Main = (props) => {
     const now_month = formatDate(
       calendarApi.currentDataManager.data.currentDate,
       {
-        titleFormat: "ISO8601",
+        timeZone: "Asia/Seoul",
         month: "2-digit",
         day: "2-digit",
         year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
       }
     );
     console.log(now_month);
