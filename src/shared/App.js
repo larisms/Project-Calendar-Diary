@@ -8,19 +8,19 @@ import { Route } from "react-router";
 import {apis} from "../lib/axios"
 
 function App() {
-  const [is_login, setstate] = React.useState('false');
+  const [is_login, setstate] = React.useState('true');
   
-  React.useEffect(()=>{
-    apis.logInAX().then((res)=>{
-      if(res.data.msg === "success"){
-          setstate(true);
-          history.push('/');
-      }else{
-          setstate(false);
-          history.push('/login');
-      }
-  })
-  },[])
+  // React.useEffect(()=>{
+  //   apis.logInAX().then((res)=>{
+  //     if(res.data.msg === "success"){
+  //         setstate(true);
+  //         history.push('/');
+  //     }else{
+  //         setstate(false);
+  //         history.push('/login');
+  //     }
+  // })
+  // },[])
 
   return (
     <ConnectedRouter history={history}>
