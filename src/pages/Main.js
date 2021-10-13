@@ -25,17 +25,17 @@ const Main = (props) => {
   const [visible, setVisible] = React.useState(false);
   const [target_date, setTarget_date] = React.useState();
 
-  const red_list = list.filter((event) => event.color === "red");
-  const brown_list = list.filter((event) => event.color === "brown");
-  const green_list = list.filter((event) => event.color === "red");
-  const blue_list = list.filter((event) => event.color === "blue");
-  const gray_list = list.filter((event) => event.color === "gray");
-  const purple_list = list.filter((event) => event.color === "purple");
+  const red_list = list.filter((event) => event.color === "#DD6262");
+  const brown_list = list.filter((event) => event.color === "#B07255");
+  const green_list = list.filter((event) => event.color === "#6C9D68");
+  const blue_list = list.filter((event) => event.color === "#6A96B8");
+  const gray_list = list.filter((event) => event.color === "#818D90");
+  const purple_list = list.filter((event) => event.color === "#9F70BC");
 
   const goToDetail = (info) => {
     dispatch(detailShow(true));
     setTarget_date(info.dateStr);
-};
+  };
 
   console.log(red_list);
 
@@ -70,15 +70,15 @@ const Main = (props) => {
 
   return (
     <React.Fragment>
-      {Detail_control? <Detail nowDate={target_date}/> : null}
-      {Add_control? <Add nowDate={target_date}/> : null}
+      {Detail_control ? <Detail nowDate={target_date} /> : null}
+      {Add_control ? <Add nowDate={target_date} /> : null}
       <Container>
         <ButtonArea>
           <Button
             className=""
             tagColor={"#DD6262"}
             style={{
-              background: "red",
+              background: "#DD6262",
             }}
             onClick={() => {
               setList(red_list);
@@ -88,7 +88,7 @@ const Main = (props) => {
             className=""
             tagColor={"#B07255"}
             style={{
-              background: "brown",
+              background: "#B07255",
             }}
             onClick={() => {
               setList(brown_list);
@@ -98,7 +98,7 @@ const Main = (props) => {
             className=""
             tagColor={"#6C9D68"}
             style={{
-              background: "green",
+              background: "6C9D68",
             }}
             onClick={() => {
               setList(green_list);
@@ -108,7 +108,7 @@ const Main = (props) => {
             className=""
             tagColor={"#6A96B8"}
             style={{
-              background: "blue",
+              background: "#6A96B8",
             }}
             onClick={() => {
               setList(blue_list);
@@ -118,7 +118,7 @@ const Main = (props) => {
             className=""
             tagColor={"#818D90"}
             style={{
-              background: "gray",
+              background: "#818D90",
             }}
             onClick={() => {
               setList(gray_list);
@@ -128,7 +128,7 @@ const Main = (props) => {
             className=""
             tagColor={"#9F70BC"}
             style={{
-              background: "purple",
+              background: "#9F70BC",
             }}
             onClick={() => {
               setList(purple_list);
