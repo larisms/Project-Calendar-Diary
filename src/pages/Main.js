@@ -9,14 +9,17 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 import ShowModal from "../components/Modal";
 import Detail from "../components/Detail";
+import Add from "../components/Add";
 import { detailShow } from "../redux/modules/show";
 import { actionCreators as loginAction } from "../redux/modules/user";
+
 
 
 const Main = (props) => {
 
   const dispatch = useDispatch();
   const Detail_control = useSelector(state => state.show.detail);
+  const Add_control = useSelector(state => state.show.add);
 
   const [list, setList] = React.useState([]);
   const [visible, setVisible] = React.useState(false);
@@ -68,6 +71,7 @@ const Main = (props) => {
   return (
     <React.Fragment>
       {Detail_control? <Detail nowDate={target_date}/> : null}
+      {Add_control? <Add nowDate={target_date}/> : null}
       <Container>
         <ButtonArea>
           <Button
