@@ -28,8 +28,9 @@ html{
 }
 
 #root{
-    /* width: 83%;
-    max-width: 990px; */
+    width: 100%;
+    height: 100%;
+    /* max-width: 990px; */
     position: relative;
 }
 

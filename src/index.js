@@ -8,6 +8,8 @@ import store from "./redux/configureStore";
 
 import {GlobalStyle} from "./shared/global"
 
+import "./shared/font.css";
+
 
 
 ReactDOM.render(
