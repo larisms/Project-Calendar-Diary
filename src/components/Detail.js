@@ -7,73 +7,76 @@ import { addShow, detailShow } from "../redux/modules/show";
 import Add from "./Add";
 
 const Detail = (props) => {
-  // const { date } = props;
 
-  const history = useHistory();
-  const dispatch = useDispatch();
+    // const { date } = props;
 
-  const post_list = useSelector((state) => state.detail.list);
+    const history = useHistory();
+    const dispatch = useDispatch();
 
-  const nowDate = props.nowDate;
-  console.log("날짜보기프롭스", props);
-  console.log("클릭날짜", nowDate);
+    const post_list = useSelector((state) => state.detail.list);
 
-  // const post_id = props.match.params.id;
-  console.log("프롭스", props);
-  console.log("포스트아이디", post_list);
-  console.log("디테일에포스트리스트", post_list);
-  console.log(post_list.title);
+    const nowDate = props.nowDate;
+    console.log("날짜보기프롭스", props);
+    console.log("클릭날짜", nowDate);
 
-  React.useEffect(() => {
-    dispatch(detailActions.setContentMW());
-  }, []);
+    // const post_id = props.match.params.id;
+    console.log("프롭스", props);
+    console.log("포스트아이디", post_list);
+    console.log("디테일에포스트리스트", post_list);
+    console.log(post_list.title);
 
-  const _delContent = (id) => {
-    dispatch(detailActions.delContentMW(id));
-  };
 
-  const exitDetail = () => {
-    dispatch(detailShow(false));
-  };
+    React.useEffect(() => {
+        dispatch(detailActions.setContentMW());
+    }, [dispatch]);
 
-  const goToAdd = () => {
-    dispatch(detailShow(false));
-    dispatch(addShow(true));
-  };
+    const _delContent = (id) => {
+        dispatch(detailActions.delContentMW(id));
+    };
 
-  return (
-    <React.Fragment>
-      <p>{nowDate}</p>
-      {post_list.map((p, idx) => {
-        return (
-          <div>
-            <p>{p.title}</p>
-            <p>{p.content}</p>
-            <button
-              onClick={() => {
-                history.replace("/add");
-              }}
-            >
-              수정
-            </button>
-            <button
-              key={p.id}
-              onClick={() => {
-                const id = p.id;
-                _delContent(id);
-                console.log("맵포스트아이디", p.id);
-              }}
-            >
-              삭제
-            </button>
-          </div>
-        );
-      })}
+    const exitDetail = () => {
+        dispatch(detailShow(false));
+    };
 
-      <button onClick={goToAdd}>추가하기</button>
-      <button onClick={exitDetail}>창닫기</button>
-    </React.Fragment>
-  );
+    const goToAdd = () => {
+        dispatch(detailShow(false))
+        dispatch(addShow(true));
+    };
+
+
+
+    return (
+        <React.Fragment>
+            <p>{nowDate}</p>
+            {post_list.map((p, idx) => {
+                return (
+                    <div>
+                        <p>{p.title}</p>
+                        <p>{p.content}</p>
+                        {/* <button title={p.title} onClick={(e) => {
+                            console.log("수정온클릭", e);
+                        }}>수정</button> */}
+
+                        <button onClick={() => {
+                            dispatch(detailActions.editContent(p));
+                            goToAdd();
+                            console.log("피피피", p);
+                            console.log("수정온클릭", p.title);
+                        }}>수정</button>
+
+                        <button key={p.id} onClick={() => {
+                            const id = p.id;
+                            _delContent(id)
+                            console.log("맵포스트아이디", p.id)
+                        }}>삭제</button>
+                    </div>
+                )
+            })}
+
+            <button onClick={goToAdd}>추가하기</button>
+            <button onClick={exitDetail}>창닫기</button>
+        </React.Fragment>
+    )
 };
 
 export default Detail;

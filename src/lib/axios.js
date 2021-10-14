@@ -55,8 +55,9 @@ export const apis = {
   addContentAX: (post) => instance.post("/diary", post),
 
   // 게시물 수정하기
-  udtContentAX: (id, post) => instance.put(`/diary/${id}`, post),
+  udtContentAX: (id, post) => instance.put("diary", id, post),
 
   // 게시물 삭제하기
-  delContentAX: (id) => instance.delete(`/diary/${id}`),
+  delContentAX: (id) => instance.delete("/diary", id),
+
 };
