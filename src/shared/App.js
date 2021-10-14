@@ -11,8 +11,10 @@ import {history} from "../redux/configureStore";
 
 function App() {
 
+    //로그인 안하고 확인할때 false 를 true 로 바꿔주세요
     const [is_login, setstate] = React.useState("false");
 
+    //로그인 안하고 확인할때 여기부터 ~
     React.useEffect(() => {
         const cookies = new Cookies();
         const token = cookies.get("token");
@@ -34,8 +36,8 @@ function App() {
             }
           })
         }
-
     }, [])
+    //~ 여기까지 주석처리 하면 됩니다.
 
     return (
         <ConnectedRouter history={history}>

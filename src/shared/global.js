@@ -10,13 +10,13 @@ ${normalize};
 html{
     width: 100%;
     height: 100%;
-    /* color:#818D90; */
+    color:#818D90;
     font-size: 12px;
 
     body{
         width: 100%;
         height: 100%;
-        /* background: #EAE6E2; */
+        background: #EAE6E2;
         /* display: flex;
         justify-content: center;
         align-items: center; */

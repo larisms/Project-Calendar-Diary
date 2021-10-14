@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
-
+//로그인/회원가입 페이지 디자인
 const StyledSection = styled.section `
-
+position: relative;
 max-width: 582px;
 width:49%;
 padding: 50px 40px;
 background-color: #EAE6E2;
-border: 2px solid rgba(129, 141, 144, 0.2);
+border-top: 2px solid rgba(129, 141, 144, 0.2);
+border-left: 2px solid rgba(129, 141, 144, 0.2);
+/* border-right: 2px solid rgba(129, 141, 144, 0.2); */
+/* border-bottom: 2px solid rgba(129, 141, 144, 0.2); */
 box-sizing: border-box;
 box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.25);
 border-radius: 20px 0px;
@@ -23,9 +26,7 @@ border-radius: 20px 0px;
 
 const StyledLabel = styled.label `
 display: flex;
-
-&:nth-child(2){margin-top:62px;}
-&:nth-child(3){margin-top:34px;}
+position: relative;
 
 span{
     display: block;

@@ -1,11 +1,14 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import _ from "lodash";
+import styled from "styled-components";
 
-import { Input,Grid } from "../elements";
+import { Input,Grid,Text,Button } from "../elements";
+import {StyledSection, StyledLabel} from "../shared/style"
 
 import { actionCreators as signupAction } from "../redux/modules/user";
 import { signupShow, loginShow } from "../redux/modules/show";
+
 
 const Signup = () => {
 
@@ -112,44 +115,85 @@ const Signup = () => {
 
     return (
         <React.Fragment>
-            <section>
-                <button onClick={goBackToLogin}>뒤로가기</button>
-                <h1>회원가입</h1>
-                <label>
-                    <p>ID</p>
+            <StyledSection>
+                <StyledGoBack onClick={goBackToLogin}>{'< back'}</StyledGoBack>
+                <StyledLabel style={{flexDirection:"column", marginTop:"70px"}}>
+                <Grid width="75px">
+                    <Text fontSize="3rem" color="#967A6D">ID</Text>
+                    </Grid>
+                    <Grid>
+                    <StyledSpan>{warnID}</StyledSpan>
+                        <Grid>
                     <Input
                         type="text"
                        
                         onChange={onChangeID}/>
-                    <button onClick={overlap}>중복확인</button>
-                    <span
-                        style={{
-                            color: "#ccc"
-                        }}>{warnID}</span>
-                </label>
-                <label>
-                    <p>PW</p>
+                    <StyledOverlap onClick={overlap}>중복확인</StyledOverlap>
+                    </Grid>
+                    
+                        </Grid>
+                </StyledLabel>
+                <StyledLabel style={{flexDirection:"column", marginTop:"50px"}}>
+                <Grid width="75px">
+                    <Text fontSize="3rem" color="#967A6D">PW</Text>
+                    </Grid>
+                    <Grid>
+                    <StyledSpan>{warnPW}</StyledSpan>
                     <Input
                         type="password"
                         
                         onChange={onChangePW}/>
-                    <span
-                        style={{
-                            color: "#ccc"
-                        }}>{warnPW}</span>
-                </label>
-                <label>
-                    <p>PW 재확인</p>
+                    
+                        </Grid>
+                </StyledLabel>
+                <StyledLabel style={{flexDirection:"column", marginTop:"20px"}}>
+                    <Grid>
+                    <Text fontSize="3rem" color="#967A6D">confirm PW</Text>
+                    </Grid>
+                    <Grid>
+                    <StyledSpan>{warnCheckPW}</StyledSpan>
                     <Input type="password" onChange={onChangeConfirmPW}/>
-                    <span
-                        style={{
-                            color: "#ccc"
-                        }}>{warnCheckPW}</span>
-                </label>
-                <button onClick={signup}>가입하기</button>
-            </section>
+                    </Grid>
+                </StyledLabel>
+                <Grid margin="95px 0 0 0">
+                <Button onClick={signup} backGround="#E5BBB4" color="#818D90">SIGNUP</Button>
+                </Grid>
+            </StyledSection>
         </React.Fragment>
     )
 }
+
+const StyledGoBack = styled.button`
+font-size: 2rem;
+color:#818D90;
+position: absolute;
+top: 20px;
+left: 20px;
+border: none;
+background: none;
+
+`
+
+const StyledOverlap = styled.button`
+
+position: absolute;
+width: fit-content;
+padding: 5px 10px;
+bottom:12.5px;
+right: 20px;
+font-size: 1.5rem;
+background: none;
+border: none;
+color: #818D90;
+
+`
+
+const StyledSpan = styled.span`
+color: #818D90;
+position:absolute;
+right: 0;
+top:0;
+
+`
 
 export default Signup;

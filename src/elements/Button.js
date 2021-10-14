@@ -39,6 +39,10 @@ background:${(props)=>props.backGround};
 border:${(props)=>props.border};
 border-radius:${(props)=>props.borderRadius};
 
+&:hover{
+    
+}
+
 `
 
 export default Button;
