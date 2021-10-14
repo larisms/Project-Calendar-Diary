@@ -2,13 +2,17 @@ import React from "react";
 import styled from "styled-components";
 
 const Input = (props) => {
-    const {type, onChange, placeholder, value} = props
+    const {type, onChange, placeholder, value,onSubmit} = props
     const styles = {
 
     }
     if(value.lenth >0){
         return (
-            <StyledInput type={type} onChange={onChange} placeholder={placeholder} value={value} {...styles}/>
+            <StyledInput type={type} onChange={onChange} placeholder={placeholder} value={value} onKeyPress={(e) => {
+                if(e.key === "Enter"){
+                  onSubmit(e);
+                }
+              }} {...styles}/>
         )
     }else{
         return (
@@ -23,7 +27,8 @@ Input.defaultProps = {
     ref:"",
     onChange:"",
     placeholder:"",
-    value:""
+    value:"",
+    onSubmit:"",
 }
 
 const StyledInput = styled.input`

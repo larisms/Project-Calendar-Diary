@@ -28,6 +28,10 @@ const StyledLabel = styled.label `
 display: flex;
 position: relative;
 
+&:nth-child(2){margin-top:55px;}
+&:nth-child(3){margin-top:20px;}
+
+
 span{
     display: block;
     width: 100%;
