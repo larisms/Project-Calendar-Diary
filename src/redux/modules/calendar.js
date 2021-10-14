@@ -3,8 +3,6 @@ import { produce } from "immer";
 import { apis } from "../../lib/axios";
 import { get } from "lodash";
 
-
-
 //Action
 const SET_CALENDAR = "SET_CALENDAR";
 const ADD_CALENDAR = "ADD_CALENDAR";
@@ -14,13 +12,7 @@ const setCalendar = createAction(SET_CALENDAR, (post_list) => ({ post_list }));
 const addCalendar = createAction(ADD_CALENDAR, (post) => ({ post }));
 
 const initialState = {
-  list: [
-    {
-      title: "테스트1",
-      date: "2021-10-13",
-      color: "red",
-    },
-  ],
+  list: [],
 };
 
 const setCalendarMW = (_today) => {
@@ -29,15 +21,17 @@ const setCalendarMW = (_today) => {
       .getPostAX({ params: { date: _today } })
       .then((res) => {
         const post_list = res.data;
-        const new_list = post_list.map((l,idx)=>{
+        const new_list = post_list.map((l, idx) => {
           return {
-            _id:idx, date:l.date, title:l.title, color:l.color
-          }
-        })
-        console.log("this month list New:::",new_list);
+            _id: idx,
+            date: l.date,
+            title: l.title,
+            color: l.color,
+          };
+        });
+        console.log("this month list New:::", new_list);
         dispatch(setCalendar(new_list));
         // console.log("this month list :::",post_list);
-        
       })
       .catch((err) => {
         console.log("에러발생", err);
@@ -46,22 +40,29 @@ const setCalendarMW = (_today) => {
 };
 
 const addCalendarMW = (post) => {
-  return function (dispatch, getState, {history}){
-    
-    const State = getState().calendar.list
-    const Post = {_id:State.length+1, date:post.date, title:post.title, color:post.color }
-    const newList = [...State,Post]
+  return function (dispatch, getState, { history }) {
+    const State = getState().calendar.list;
+    const Post = {
+      _id: State.length + 1,
+      date: post.date,
+      title: post.title,
+      color: post.color,
+    };
+    const newList = [...State, Post];
 
-    const List = newList.map((l, idx)=>{
-      return{
-        _id:l._id, date:l.date, title:l.title, color:l.color
-      }
-    })
-    
-    dispatch(addCalendar(List))
-    console.log("[module calendar] List ::: ",List)
-  }
-}
+    const List = newList.map((l, idx) => {
+      return {
+        _id: l._id,
+        date: l.date,
+        title: l.title,
+        color: l.color,
+      };
+    });
+
+    dispatch(addCalendar(List));
+    console.log("[module calendar] List ::: ", List);
+  };
+};
 
 export default handleActions(
   {
@@ -71,8 +72,8 @@ export default handleActions(
       }),
     [ADD_CALENDAR]: (state, action) =>
       produce(state, (draft) => {
-      draft.list = action.payload.post;
-    }),
+        draft.list = action.payload.post;
+      }),
   },
   initialState
 );
