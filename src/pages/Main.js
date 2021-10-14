@@ -13,6 +13,7 @@ import Add from "../components/Add";
 import { detailShow, addShow } from "../redux/modules/show";
 import { actionCreators as loginAction } from "../redux/modules/user";
 import { actionCreators as calendarAction } from "../redux/modules/calendar";
+import { actionCreators } from "../redux/modules/detail";
 
 const Main = (props) => {
   const dispatch = useDispatch();
@@ -48,15 +49,16 @@ const Main = (props) => {
         minute: "2-digit",
       }
     );
-    apis
-      .getPostAX({ params: { date: _today } })
-      .then((res) => {
-        const post = res.data;
-        setList(...list, post);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    // apis
+    //   .getPostAX({ params: { date: _today } })
+    //   .then((res) => {
+    //     const post = res.data;
+    //     setList(...list, post);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
+    dispatch(calendarAction.setCalendarMW(_today));
   }, []);
 
   // //Modal창 열기 함수
