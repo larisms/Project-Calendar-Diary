@@ -6,7 +6,7 @@ const cookies = new Cookies();
 
 const instance = axios.create({
   // 기본적으로 우리가 바라볼 서버의 주소
-  baseURL: "http://3.36.99.138:4000/",
+  baseURL: "http://13.124.198.97:4000/",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -55,7 +55,7 @@ export const apis = {
   addContentAX: (post) => instance.post("/diary", post),
 
   // 게시물 수정하기
-  udtContentAX: (id, post) => instance.put("diary", id, post),
+  udtContentAX: (id, post) => instance.put("/diary", { id, post }),
 
   // 게시물 삭제하기
   delContentAX: (id) => instance.delete("/diary", id),

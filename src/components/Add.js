@@ -17,14 +17,14 @@ const Add = (props) => {
         console.log(state.detail)
         return state.detail.editList
     });
-    const is_edit = editPost.id ? true : false;
+    const is_edit = editPost._id ? true : false;
     // console.log("편집데이터가져오기", editPost);
     // console.log("이즈에딧확인하기", is_edit);
 
     
     const [title, setTitle] = React.useState(is_edit ? editPost.title : "");
     const [content, setContent] = React.useState(is_edit ? editPost.content : "");
-    const [color, setColor] = React.useState(is_edit ? editPost.color : "");
+    const [color, setColor] = React.useState(is_edit ? editPost.color : "#DD6262");
     // const [editTitle, setEditTitle] = React.useState(is_edit? editPost.title : "");
     // const [editContent, setEditContent] = React.useState(is_edit? editPost.content : "");
 
@@ -53,7 +53,7 @@ const Add = (props) => {
     }
 
     const _udtContent = () => {
-        const id = editPost.id
+        const id = editPost._id
         console.log("업데이트넘겨주는포스트", post)
         console.log("업데이트넘겨주는아이디", id)
         dispatch(detailActions.udtContentMW(id, post))

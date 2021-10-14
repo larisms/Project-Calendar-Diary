@@ -22,9 +22,7 @@ const Detail = (props) => {
 
     // const post_id = props.match.params.id;
     console.log("프롭스", props);
-    console.log("포스트아이디", post_list.id);
     console.log("디테일에포스트리스트", post_list);
-    console.log(post_list.title);
 
 
     React.useEffect(() => {
@@ -61,14 +59,14 @@ const Detail = (props) => {
                         <button onClick={() => {
                             dispatch(detailActions.editContent(p));
                             goToAdd();
-                            console.log("피피피", p);
-                            console.log("수정온클릭", p.title);
+                            console.log("수정온클릭 피피피", p);
+                            console.log("수정온클릭 피 아이디", p._id);
                         }}>수정</button>
 
-                        <button key={p.id} onClick={() => {
-                            const id = p.id;
+                        <button key={p._id} onClick={() => {
+                            const id = p._id;
                             _delContent(id)
-                            console.log("맵포스트아이디", p.id)
+                            console.log("맵포스트아이디", p._id)
                         }}>삭제</button>
                     </div>
                 )

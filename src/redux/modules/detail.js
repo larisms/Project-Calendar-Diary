@@ -59,7 +59,7 @@ const udtContentMW = (id, post) => {
   return function (dispatch, getState, { history }) {
     console.log("수정데이터미들웨어에받기", id, post);
     apis
-      .udtContentAX({ params: { id: id } }, post)
+      .udtContentAX(id, post)
       .then((res) => {
         dispatch(udtContent(id, post));
       })
@@ -111,22 +111,27 @@ export default handleActions(
     [UDT_CONTENT]: (state, action) =>
       produce(state, (draft) => {
         let idx = draft.list.findIndex((p) => {
-          console.log("업데이트 피아이디", p.id);
-          console.log("업데이트 액션페이로드아이디", action.payload.id);
-          return p.id === action.payload.id;
+          console.log("업데이트 피아이디", p._id);
+          console.log("업데이트 액션페이로드", action.payload);
+          console.log("업데이트 액션페이로드아이디", action.payload._id);
+          return p._id === action.payload._id;
         });
         draft.list[idx] = { ...draft.list[idx], ...action.payload.post };
       }),
 
     [DEL_CONTENT]: (state, action) =>
       produce(state, (draft) => {
-        let idx = draft.list.findIndex((p) => {
-          console.log("피피", p.id);
-          return p.id === action.payload.id;
+        let target_idx = draft.list.findIndex((p) => {
+          console.log("삭제", p)
+          console.log("삭제 액션페이로드", action.payload)
+          console.log("삭제 액션페이로드아이디", action.payload.id)
+          console.log("삭제 피 아이디", p._id);          
+          return p._id === action.payload.id;
         });
 
-        if (idx !== -1) {
-          draft.list.splice(idx, 1);
+        if (target_idx !== -1) {
+          console.log("삭제 타겟인덱스", target_idx)
+          draft.list.splice(target_idx, 1);
         }
       }),
   },
