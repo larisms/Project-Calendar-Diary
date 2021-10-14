@@ -8,19 +8,19 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { formatDate } from "@fullcalendar/common";
 
-import ShowModal from "../components/Modal";
 import Detail from "../components/Detail";
 import Add from "../components/Add";
 import { detailShow, addShow } from "../redux/modules/show";
 import { actionCreators as loginAction } from "../redux/modules/user";
+import { actionCreators as calendarAction } from "../redux/modules/calendar";
 
 const Main = (props) => {
   const dispatch = useDispatch();
   const Detail_control = useSelector((state) => state.show.detail);
   const Add_control = useSelector((state) => state.show.add);
+  const new_list = useSelector((state) => state.calendar.list);
 
   const [list, setList] = React.useState([]);
-  const [visible, setVisible] = React.useState(false);
   const [target_date, setTarget_date] = React.useState();
 
   const red_list = list.filter((event) => event.color === "#DD6262");
@@ -40,9 +40,12 @@ const Main = (props) => {
     const _today = formatDate(
       calendarRef.current._calendarApi.currentDataManager.data.currentDate,
       {
+        timeZone: "Asia/Seoul",
         month: "2-digit",
         day: "2-digit",
         year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
       }
     );
     apis
@@ -78,14 +81,16 @@ const Main = (props) => {
     const now_month = formatDate(
       calendarApi.currentDataManager.data.currentDate,
       {
-        titleFormat: "ISO8601",
+        timeZone: "Asia/Seoul",
         month: "2-digit",
         day: "2-digit",
         year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
       }
     );
     console.log(now_month);
-    apis.getPostAX("http://localhost:4000/", { params: { date: now_month } });
+    apis.getPostAX({ params: { date: now_month } });
   };
   //캘린더 익월로 이동하기 버튼
   const NextButton = () => {
@@ -94,14 +99,16 @@ const Main = (props) => {
     const now_month = formatDate(
       calendarApi.currentDataManager.data.currentDate,
       {
-        titleFormat: "ISO8601",
+        timeZone: "Asia/Seoul",
         month: "2-digit",
         day: "2-digit",
         year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
       }
     );
     console.log(now_month);
-    apis.getPostAX("http://localhost:4000/", { params: { date: now_month } });
+    apis.getPostAX({ params: { date: now_month } });
   };
 
   return (
@@ -186,7 +193,7 @@ const Main = (props) => {
             right: "today",
           }}
           titleFormat={titleFormat}
-          events={list}
+          events={new_list}
           dateClick={goToDetail}
         />
       </Container>
