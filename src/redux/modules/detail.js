@@ -46,8 +46,9 @@ const addContentMW = (post) => {
     console.log("post넘겨받기", post);
     apis
       .addContentAX(post)
-      .then(() => {
+      .then((res) => {
         dispatch(addContent(post));
+        // console.log("[detail.js] addContentAX :::", res);
       })
       .catch((err) => {
         console.log("애드에러", err);

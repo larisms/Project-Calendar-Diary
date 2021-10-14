@@ -41,6 +41,11 @@ const Main = (props) => {
     
   };
 
+  const thisMonthEventList = useSelector((state)=>state.calendar.list);
+    const testButton = () => {
+        console.log("[Main] this month list:::",thisMonthEventList);
+    }
+
     //서버로 부터 데이터 받아오기
     React.useEffect(() => {
         const _today = formatDate(
@@ -114,6 +119,7 @@ const Main = (props) => {
 
     return (
         <React.Fragment>
+          <button onClick={testButton}>테스트 버튼</button>
             {
                 Detail_control
                     ? <Detail date={target_date}/>

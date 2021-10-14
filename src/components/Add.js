@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 
 import { actionCreators as detailActions } from "../redux/modules/detail";
+import { actionCreators as addActions } from "../redux/modules/calendar";
 import { addShow, detailShow } from "../redux/modules/show";
 
 
@@ -12,6 +13,10 @@ const Add = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const thisMonthEventList = useSelector((state)=>state.calendar.list);
+    const testButton = () => {
+        console.log("this month list:::",thisMonthEventList);
+    }
 
     const editPost = useSelector((state) => {
         console.log(state.detail)
@@ -46,7 +51,8 @@ const Add = (props) => {
 
 
     const _addContent = () => {
-        dispatch(detailActions.addContentMW(post))
+        dispatch(detailActions.addContentMW(post));
+        dispatch(addActions.addCalendarMW(post));
         window.alert("저장완료");
         dispatch(detailShow(true));
         dispatch(addShow(false));
@@ -70,6 +76,7 @@ const Add = (props) => {
 
     return (
         <React.Fragment>
+            <button onClick={testButton}>테스트버튼</button>
             <p>{date}</p>
             <div>
                 <input
