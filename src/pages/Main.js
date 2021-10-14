@@ -116,12 +116,12 @@ const Main = (props) => {
         <React.Fragment>
             {
                 Detail_control
-                    ? <Detail nowDate={target_date}/>
+                    ? <Detail date={target_date}/>
                     : null
             }
             {
                 Add_control
-                    ? <Add nowDate={target_date}/>
+                    ? <Add date={target_date}/>
                     : null
             }
             <Header/>
