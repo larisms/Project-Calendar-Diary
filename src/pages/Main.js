@@ -49,7 +49,7 @@ const Main = (props) => {
       }
     );
     apis
-      .getPostAX("http://localhost:4000/", { params: { date: _today } })
+      .getPostAX({ params: { date: _today } })
       .then((res) => {
         const post = res.data;
         setList(...list, post);
