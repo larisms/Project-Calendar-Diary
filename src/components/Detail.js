@@ -61,7 +61,6 @@ const Detail = (props) => {
                         <button onClick={() => {
                             dispatch(detailActions.editContent(p));
                             goToAdd();
-                            const _title = p.title;
                             console.log("피피피", p);
                             console.log("수정온클릭", p.title);
                         }}>수정</button>
