@@ -133,7 +133,7 @@ const Main = (props) => {
             <Header/>
             <Container>
              
-                <section>
+            <section>
                     <MonthMove>
                         <button onClick={PrevButton}>{String("<")}</button>
                         <button onClick={NextButton}>{String(">")}</button>
@@ -196,6 +196,7 @@ const Main = (props) => {
                                 setList(purple_list);
                             }}></Button>
                     </ButtonArea>
+                    
               <FullCalendar
                     ref={calendarRef}
                     plugins={[dayGridPlugin, interactionPlugin]}
@@ -288,11 +289,13 @@ const ButtonArea = styled.div `
   position: absolute;
   display: flex;
   left: 5%;
+  z-index:30;
   /* top:9px; */
   @media only screen and (max-width: 680px){
     /* top: auto; */
     bottom:-30px;
     left: 0;
+    
   }
 `;
 
