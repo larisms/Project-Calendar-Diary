@@ -1,16 +1,18 @@
 import axios from "axios";
 import Main from "../pages/Main";
-import { Cookies } from "react-cookie";
+import {Cookies} from "react-cookie";
+
+
 
 const cookies = new Cookies();
 
 const instance = axios.create({
   // 기본적으로 우리가 바라볼 서버의 주소
-  baseURL: "http://3.36.99.138:4000/",
+  baseURL: "http://13.124.198.97:4000/",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
-    Authorization: `Bearer ${cookies.get("token")}`,
+    Authorization:`Bearer ${cookies.get('token')}`
   },
   withCredentials: true,
 });
@@ -49,7 +51,7 @@ export const apis = {
   getPostAX: (date) => instance.get("/", date),
 
   // 게시물 불러오기
-  setContentAX: (date) => instance.get("/diary", date),
+  setContentAX: () => instance.get("/diary", {params:{date:'2021-10-12'}}),
 
   // 게시물 작성하기
   addContentAX: (post) => instance.post("/diary", post),
@@ -59,4 +61,5 @@ export const apis = {
 
   // 게시물 삭제하기
   delContentAX: (id) => instance.delete("/diary", id),
+
 };

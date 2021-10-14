@@ -40,12 +40,7 @@ border:${(props)=>props.border};
 border-radius:${(props)=>props.borderRadius};
 
 &:hover{
-    background: darken(${(props)=>props.backGround}, 1.5%);
-    border: 1px solid rgba(#000, .05);
-    box-shadow: 1px 1px 2px rgba(#fff, .2);
-    color: lighten(${(props)=>props.backGround}, 18%); 
-    text-decoration: none;
-    text-shadow: -1px -1px 0 darken(${(props)=>props.backGround}, 9.5%);
+
 }
 
 `

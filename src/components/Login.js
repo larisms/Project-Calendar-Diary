@@ -29,7 +29,7 @@ const Login = () => {
             dispatch(loginAction.loginMW(ID, PW))
         } else if (ID === "" || PW === "") {
             setWarn('아이디, 혹은 비밀번호를 확인해주세요!');
-        }
+        } 
     }
 
     const onChangeWarnID = (e) => {
@@ -53,7 +53,7 @@ const Login = () => {
                         <Text fontSize="3rem" color="#967A6D">ID</Text>
                     </Grid>
                     <Grid>
-                        <Input type="text" onChange={onChangeWarnID}/>
+                        <Input type="text" onChange={onChangeWarnID} onSubmit={login}/>
                     </Grid>
                 </StyledLabel>
                 <StyledLabel>
@@ -61,7 +61,7 @@ const Login = () => {
                         <Text fontSize="3rem" color="#967A6D">PW</Text>
                     </Grid>
                     <Grid>
-                        <Input type="password" onChange={onChangeWarnPW}/>
+                        <Input type="password" onChange={onChangeWarnPW}  onSubmit={login}/>
                         <span>{warn}</span>
                     </Grid>
                 </StyledLabel>

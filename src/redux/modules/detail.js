@@ -23,17 +23,19 @@ const initialState = {
 
 const initialPost = {};
 
-const setContentMW = (date) => {
+const setContentMW = () => {
     return function (dispatch, getState, { history }) {
+      // console.log("day:::",day);
+      // const _day = String(day)
         apis
-            .setContentAX({ params: { date : date }})
+            .setContentAX()
             .then((res) => {
-
-                const _post_list = res
-                console.log("리스폰스", _post_list);
-                const post_list = res.data;
-                console.log("리스폰스데이터", post_list);
-                dispatch(setContent(post_list));
+              console.log("res:::",res);
+                // const _post_list = res
+                // console.log("리스폰스", _post_list);
+                // const post_list = res.data;
+                // console.log("리스폰스데이터", post_list);
+                // dispatch(setContent(post_list));
             })
             .catch((err) => {
                 console.log("로드에러", err)

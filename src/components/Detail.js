@@ -16,20 +16,21 @@ const Detail = (props) => {
 
     const post_list = useSelector((state) => state.detail.list);
 
-    const nowDate = props.nowDate;
-    console.log("날짜보기프롭스", props);
-    console.log("클릭날짜", nowDate);
+    // const nowDate = props.nowDate;
+    // console.log("날짜보기프롭스", props);
+    // console.log("클릭날짜", nowDate);
 
     // const post_id = props.match.params.id;
-    console.log("프롭스", props);
-    console.log("포스트아이디", post_list);
-    console.log("디테일에포스트리스트", post_list);
-    console.log(post_list.title);
+    // console.log("프롭스", props);
+    // console.log("포스트아이디", post_list);
+    // console.log("디테일에포스트리스트", post_list);
+    // console.log(post_list.title);
 
 
-    React.useEffect(() => {
-        dispatch(detailActions.setContentMW(nowDate));
-    }, [dispatch]);
+    // React.useEffect(() => {
+    //     // dispatch(detailActions.setContentMW(nowDate));
+    //     console.log("postlist:::",post_list)
+    // }, []);
 
     const _delContent = (id) => {
         dispatch(detailActions.delContentMW(id));
@@ -48,7 +49,7 @@ const Detail = (props) => {
 
     return (
         <React.Fragment>
-            <p>{nowDate}</p>
+            {/* <p>{nowDate}</p> */}
             {post_list.map((p, idx) => {
                 return (
                     <div>
