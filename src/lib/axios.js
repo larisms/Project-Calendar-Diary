@@ -1,5 +1,8 @@
 import axios from "axios";
 import Main from "../pages/Main";
+import {Cookies} from "react-cookie";
+
+const cookies = new Cookies();
 
 const instance = axios.create({
   // 기본적으로 우리가 바라볼 서버의 주소
@@ -7,6 +10,7 @@ const instance = axios.create({
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
+    Authorization:`Bearer ${cookies.get('token')}`
   },
   withCredentials: true,
 });
@@ -27,7 +31,7 @@ export const apis = {
   //   delPost: (id) => instance.delete(`/posts/${id}`),
 
   //로그인 페이지
-  logInAX: (token) => instance.get("/login",{token}),
+  logInAX: (token) => instance.get("/login"),
 
   //회원가입 페이지
   signUpAX: () => instance.get("/signup"),

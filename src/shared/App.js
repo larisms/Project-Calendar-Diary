@@ -21,18 +21,7 @@ function App() {
         if(token === undefined){
           setstate(false);
           history.push('/login');
-          // apis
-          //   .logInAX("")
-          //   .then((res) => {
-          //       if (res.data.msg === "fail") {
-          //           setstate(false);
-          //           history.push('/login');
-          //       } else if (token === "" && res.data.msg === "success") {
-          //           cookies.set('token', res.data.msg);
-          //           setstate(true);
-          //           history.push('/');
-          //       }
-          //   })
+          console.log("token is undefined")
         }else if (token !== undefined){
           apis.logInAX(token).then((res)=>{
             if(res.data.msg === "fail"){

@@ -4,6 +4,7 @@ import produce from "immer";
 import {createAction, handleActions} from "redux-actions";
 import {apis} from "../../lib/axios";
 import {signupShow, loginShow} from "./show";
+import {Cookies} from "react-cookie";
 
 //로그인,회원가입 페이지 렌더링 응답? 회원가입 정보 초기값
 const initialState = {
@@ -72,11 +73,13 @@ const checkOverlapMW = (userID) => {
 const loginMW = (userID,PW ) => {
     return function(dispatch, getState, {history}){
         const user = {userID:userID, PW:PW}
+        const cookies = new Cookies();
         apis.loginPostAX(user).then((res)=>{
             if(res.data.msg === "success"){
+                cookies.set('token',res.data.token);
                 window.location.reload();
             }else{
-                alert('로그인 실패');
+                alert(res.data.msg);
             }
             console.log(res);
         })
