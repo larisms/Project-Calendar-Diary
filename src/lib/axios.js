@@ -1,6 +1,6 @@
 import axios from "axios";
 import Main from "../pages/Main";
-import {Cookies} from "react-cookie";
+import { Cookies } from "react-cookie";
 
 const cookies = new Cookies();
 
@@ -10,7 +10,7 @@ const instance = axios.create({
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
-    Authorization:`Bearer ${cookies.get('token')}`
+    Authorization: `Bearer ${cookies.get("token")}`,
   },
   withCredentials: true,
 });
@@ -49,7 +49,7 @@ export const apis = {
   getPostAX: (date) => instance.get("/", date),
 
   // 게시물 불러오기
-  setContentAX: () => instance.get("/diary"),
+  setContentAX: (date) => instance.get("/diary", date),
 
   // 게시물 작성하기
   addContentAX: (post) => instance.post("/diary", post),
@@ -59,5 +59,4 @@ export const apis = {
 
   // 게시물 삭제하기
   delContentAX: (id) => instance.delete("/diary", id),
-
 };

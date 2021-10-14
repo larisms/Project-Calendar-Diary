@@ -14,6 +14,7 @@ import Header from "../components/Header";
 import { detailShow, addShow } from "../redux/modules/show";
 import { actionCreators as loginAction } from "../redux/modules/user";
 import { actionCreators as calendarAction } from "../redux/modules/calendar";
+import { actionCreators } from "../redux/modules/detail";
 
 const Main = (props) => {
   const dispatch = useDispatch();
@@ -49,15 +50,16 @@ const Main = (props) => {
         minute: "2-digit",
       }
     );
-    apis
-      .getPostAX({ params: { date: _today } })
-      .then((res) => {
-        const post = res.data;
-        setList(...list, post);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    // apis
+    //   .getPostAX({ params: { date: _today } })
+    //   .then((res) => {
+    //     const post = res.data;
+    //     setList(...list, post);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
+    dispatch(calendarAction.setCalendarMW(_today));
   }, []);
 
   // //Modal창 열기 함수
@@ -221,8 +223,8 @@ const Container = styled.div`
 `;
 
 const Button = styled.div`
-  width: 25px;
-  height: 25px;
+  width: 2vw;
+  height: 2vw;
   border-radius: 100px;
   border: none;
   opacity: 0.5;
@@ -231,34 +233,38 @@ const Button = styled.div`
   &.on {
     opacity: 1;
   }
+  /* @media only screen and (max-width: 680px) {
+    width: 3vw;
+    height: 3vw;
+  } */
 `;
 
 const ButtonArea = styled.div`
   position: absolute;
   display: flex;
-  top: 6%;
   left: 5%;
 `;
 
 const MonthMove = styled.div`
-  width: 300px;
+  width: 25vw;
   height: 60px;
-  /* height: 154px; */
   display: flex;
   justify-content: space-between;
-  align-items: center;
   position: absolute;
-  top: 4%;
-  left: 48.5%;
-  margin-left: -160px;
+  top: -1.6vh;
+  left: 34.5vw;
 
   @media only screen and (max-width: 680px) {
+    width: 20vw;
+    left: 35.7vw;
+    top: -1.8vh;
   }
+
   button {
     font-size: 3rem;
     border: none;
     background: none;
-    color: black;
+    color: #6f7983;
     height: 60px;
     line-height: 60px;
     &:hover {
