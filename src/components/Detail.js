@@ -6,7 +6,6 @@ import { actionCreators as detailActions } from "../redux/modules/detail";
 import { addShow, detailShow } from "../redux/modules/show";
 import Add from "./Add";
 
-
 const Detail = (props) => {
 
     // const { date } = props;
@@ -79,6 +78,5 @@ const Detail = (props) => {
         </React.Fragment>
     )
 };
-
 
 export default Detail;
