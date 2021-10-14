@@ -2,7 +2,7 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import _ from "lodash";
 
-import Input from "../elements/Input";
+import { Input,Grid } from "../elements";
 
 import { actionCreators as signupAction } from "../redux/modules/user";
 import { signupShow, loginShow } from "../redux/modules/show";
@@ -51,15 +51,12 @@ const Signup = () => {
 
     const valuePW = React.useCallback(_.debounce((e) => {
         const value = e.target.value;
-        console.log("checkID:::",ID)
         if (value.length < 4) {
             setwarnPW("4자 이상 입력해주세요")
             setPassPW("fail")
-        } else if(value.indexOf(ID) !== -1){
-            
+        } else if(value.indexOf(ID) !== -1){   
             setwarnPW("아이디와 다르게 입력해주세요")
             setPassPW("fail")
-
         }
         else {
             setwarnPW("")
