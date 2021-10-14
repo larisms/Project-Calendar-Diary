@@ -20,10 +20,11 @@ const initialState = {
 const setCalendarMW = (_today) => {
   return function (dispatch) {
     apis
-      .getPostAX(_today)
+      .getPostAX({ params: { date: _today } })
       .then((res) => {
         const post_list = res.data;
         dispatch(setCalendar(post_list));
+        console.log(post_list);
       })
       .catch((err) => {
         console.log("에러발생", err);
