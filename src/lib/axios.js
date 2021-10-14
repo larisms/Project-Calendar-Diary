@@ -26,7 +26,7 @@ export const apis = {
   //   delPost: (id) => instance.delete(`/posts/${id}`),
 
   //로그인 페이지
-  logInAX: () => instance.get("/login"),
+  logInAX: (token) => instance.get("/login",{token}),
 
   //회원가입 페이지
   signUpAX: () => instance.get("/signup"),

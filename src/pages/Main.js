@@ -45,7 +45,7 @@ const Main = (props) => {
         year: "numeric",
       }
     );
-    apis.apis
+    apis
       .getPostAX("http://localhost:4000/", { params: { date: _today } })
       .then((res) => {
         const post = res.data;
