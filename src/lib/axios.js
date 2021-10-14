@@ -49,7 +49,7 @@ export const apis = {
   getPostAX: (date) => instance.get("/", date),
 
   // 게시물 불러오기
-  setContentAX: () => instance.get("/diary"),
+  setContentAX: (date) => instance.get("/diary", date),
 
   // 게시물 작성하기
   addContentAX: (post) => instance.post("/diary", post),

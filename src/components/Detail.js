@@ -28,7 +28,7 @@ const Detail = (props) => {
 
 
     React.useEffect(() => {
-        dispatch(detailActions.setContentMW());
+        dispatch(detailActions.setContentMW(nowDate));
     }, [dispatch]);
 
     const _delContent = (id) => {
@@ -52,8 +52,8 @@ const Detail = (props) => {
             {post_list.map((p, idx) => {
                 return (
                     <div>
-                        <Text fontSize="15px">{p.title}</Text>
-                        <Text fontSize="15px">{p.content}</Text>
+                        <Text fontSize="20px">{p.title}</Text>
+                        <Text fontSize="20px">{p.content}</Text>
                         {/* <button title={p.title} onClick={(e) => {
                             console.log("수정온클릭", e);
                         }}>수정</button> */}

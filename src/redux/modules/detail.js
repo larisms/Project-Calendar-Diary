@@ -30,10 +30,10 @@ const initialPost = {
 
 };
 
-const setContentMW = () => {
+const setContentMW = (date) => {
     return function (dispatch, getState, { history }) {
         apis
-            .setContentAX()
+            .setContentAX({ params: { date : date }})
             .then((res) => {
 
                 const _post_list = res
