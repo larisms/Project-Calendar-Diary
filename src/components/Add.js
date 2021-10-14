@@ -28,7 +28,7 @@ const Add = (props) => {
     // const [editTitle, setEditTitle] = React.useState(is_edit? editPost.title : "");
     // const [editContent, setEditContent] = React.useState(is_edit? editPost.content : "");
 
-    const nowDate = props.nowDate;
+    const date = props.date;
 
     const changeTitle = (e) => {
         setTitle(e.target.value);
@@ -38,7 +38,7 @@ const Add = (props) => {
     }
 
     const post = {
-        date: nowDate,
+        date: date,
         title: title,
         content: content,
         color: color,
@@ -70,7 +70,7 @@ const Add = (props) => {
 
     return (
         <React.Fragment>
-            <p>{nowDate}</p>
+            <p>{date}</p>
             <div>
                 <input
                     value={title}
