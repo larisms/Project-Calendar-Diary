@@ -4,7 +4,8 @@ import { useHistory } from "react-router";
 
 import { actionCreators as detailActions } from "../redux/modules/detail";
 import { addShow, detailShow } from "../redux/modules/show";
-import Add from "./Add";
+import { Input, Grid, Text, Button } from "../elements";
+
 
 const Detail = (props) => {
 
@@ -51,8 +52,8 @@ const Detail = (props) => {
             {post_list.map((p, idx) => {
                 return (
                     <div>
-                        <p>{p.title}</p>
-                        <p>{p.content}</p>
+                        <Text fontSize="15px">{p.title}</Text>
+                        <Text fontSize="15px">{p.content}</Text>
                         {/* <button title={p.title} onClick={(e) => {
                             console.log("수정온클릭", e);
                         }}>수정</button> */}
