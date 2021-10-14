@@ -25,10 +25,10 @@ const initialPost = {};
 
 const setContentMW = (date) => {
     return function (dispatch, getState, { history }) {
+        console.log("나우데이트", date)
         apis
             .setContentAX({ params: { date : date }})
             .then((res) => {
-
                 const _post_list = res
                 console.log("리스폰스", _post_list);
                 const post_list = res.data;

@@ -14,6 +14,7 @@ import Header from "../components/Header";
 import { detailShow, addShow } from "../redux/modules/show";
 import { actionCreators as loginAction } from "../redux/modules/user";
 import { actionCreators as calendarAction } from "../redux/modules/calendar";
+import { actionCreators as detailActions } from "../redux/modules/detail";
 import { actionCreators } from "../redux/modules/detail";
 
 const Main = (props) => {
@@ -33,8 +34,9 @@ const Main = (props) => {
   const purple_list = list.filter((event) => event.color === "#9F70BC");
 
   const goToDetail = (info) => {
-    dispatch(detailShow(true));
     setTarget_date(info.dateStr);
+    dispatch(detailShow(true));
+    
   };
 
   //서버로 부터 데이터 받아오기
@@ -116,8 +118,8 @@ const Main = (props) => {
 
   return (
     <React.Fragment>
-      {Detail_control ? <Detail nowDate={target_date} /> : null}
-      {Add_control ? <Add nowDate={target_date} /> : null}
+      {Detail_control ? <Detail date={target_date} /> : null}
+      {Add_control ? <Add date={target_date} /> : null}
       <Header/>
       <Container>
         <MonthMove>
