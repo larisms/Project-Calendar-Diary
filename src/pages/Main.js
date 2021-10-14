@@ -35,11 +35,11 @@ const Main = (props) => {
     const gray_list = list.filter((event) => event.color === "#818D90");
     const purple_list = list.filter((event) => event.color === "#9F70BC");
 
-    const goToDetail = (info) => {
-        dispatch(detailShow(true));
-        setTarget_date(info.dateStr);
-        dispatch(detailActions.setContentMW(info.dateStr));
-    };
+  const goToDetail = (info) => {
+    setTarget_date(info.dateStr);
+    dispatch(detailShow(true));
+    
+  };
 
     //서버로 부터 데이터 받아오기
     React.useEffect(() => {
@@ -267,6 +267,9 @@ const Button = styled.div `
   margin-right: 10px;
   cursor: pointer;
   &.on {
+    opacity: 1;
+  }
+  &:hover{
     opacity: 1;
   }
   @media only screen and (max-width: 680px) {

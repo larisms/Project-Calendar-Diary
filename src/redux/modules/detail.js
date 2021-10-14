@@ -25,17 +25,15 @@ const initialPost = {};
 
 const setContentMW = () => {
     return function (dispatch, getState, { history }) {
-      // console.log("day:::",day);
-      // const _day = String(day)
+        // console.log("나우데이트", date)
         apis
             .setContentAX()
             .then((res) => {
-              console.log("res:::",res);
-                // const _post_list = res
-                // console.log("리스폰스", _post_list);
-                // const post_list = res.data;
-                // console.log("리스폰스데이터", post_list);
-                // dispatch(setContent(post_list));
+                const _post_list = res
+                console.log("리스폰스", _post_list);
+                const post_list = res.data;
+                console.log("리스폰스데이터", post_list);
+                dispatch(setContent(post_list));
             })
             .catch((err) => {
                 console.log("로드에러", err)
