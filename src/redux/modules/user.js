@@ -81,7 +81,7 @@ const loginMW = (userID,PW ) => {
             }else{
                 alert(res.data.msg);
             }
-            console.log(res);
+            console.log("response:::", res);
         })
     }
 }

@@ -10,6 +10,7 @@ import { formatDate } from "@fullcalendar/common";
 
 import Detail from "../components/Detail";
 import Add from "../components/Add";
+import Header from "../components/Header";
 import { detailShow, addShow } from "../redux/modules/show";
 import { actionCreators as loginAction } from "../redux/modules/user";
 import { actionCreators as calendarAction } from "../redux/modules/calendar";
@@ -115,6 +116,7 @@ const Main = (props) => {
     <React.Fragment>
       {Detail_control ? <Detail nowDate={target_date} /> : null}
       {Add_control ? <Add nowDate={target_date} /> : null}
+      <Header/>
       <Container>
         <MonthMove>
           <button onClick={PrevButton}>{String("<")}</button>
