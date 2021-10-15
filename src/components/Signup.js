@@ -119,7 +119,7 @@ const Signup = () => {
                     <Grid>
                         <StyledSpan>{warnID}</StyledSpan>
                         <Grid>
-                            <Input type="text" onChange={onChangeID}/>
+                            <Input type="text" onChange={onChangeID} onSubmit={overlap}/>
                             <StyledOverlap onClick={overlap}>중복확인</StyledOverlap>
                         </Grid>
 
@@ -135,7 +135,7 @@ const Signup = () => {
                     </Grid>
                     <Grid>
                         <StyledSpan>{warnPW}</StyledSpan>
-                        <Input type="password" onChange={onChangePW}/>
+                        <Input type="password" onChange={onChangePW} onSubmit={signup}/>
 
                     </Grid>
                 </StyledLabel>
@@ -149,7 +149,7 @@ const Signup = () => {
                     </Grid>
                     <Grid>
                         <StyledSpan>{warnCheckPW}</StyledSpan>
-                        <Input type="password" onChange={onChangeConfirmPW}/>
+                        <Input type="password" onChange={onChangeConfirmPW} onSubmit={signup}/>
                     </Grid>
                 </StyledLabel>
                 <Grid margin="95px 0 0 0">
