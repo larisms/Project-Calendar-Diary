@@ -86,8 +86,15 @@ const Add = (props) => {
         <React.Fragment>
             <ModalBG>
                 <DiaryDate fontSize="20px">{date}</DiaryDate>
-                
                 <InputDiv>
+                <ColorBtnDiv>
+                    <ColorBtn color="#DD6262" onClick={clickColor}></ColorBtn>
+                    <ColorBtn color="#B07255" onClick={clickColor}></ColorBtn>
+                    <ColorBtn color="#6C9D68" onClick={clickColor}></ColorBtn>
+                    <ColorBtn color="#6A96B8" onClick={clickColor}></ColorBtn>
+                    <ColorBtn color="#818D90" onClick={clickColor}></ColorBtn>
+                    <ColorBtn color="#9F70BC" onClick={clickColor}></ColorBtn>
+                </ColorBtnDiv>
                     <SubText>Title</SubText>
                     <TitleInput
                         value={title}
@@ -103,19 +110,12 @@ const Add = (props) => {
                         placeholder="내용을 입력해주세요"
                     ></ContentInput>
                 </InputDiv>
-                <div>
-                    <ColorButton color="#DD6262" onClick={clickColor}></ColorButton>
-                    <ColorButton color="#B07255" onClick={clickColor}></ColorButton>
-                    <ColorButton color="#6C9D68" onClick={clickColor}></ColorButton>
-                    <ColorButton color="#6A96B8" onClick={clickColor}></ColorButton>
-                    <ColorButton color="#818D90" onClick={clickColor}></ColorButton>
-                    <ColorButton color="#9F70BC" onClick={clickColor}></ColorButton>
-                </div>
+                
                 <div>
                     {is_edit ? (
-                        <button onClick={_udtContent}>수정하기</button>
+                        <AddBtn onClick={_udtContent}>수정하기</AddBtn>
                     ) : (
-                        <button onClick={_addContent}>저장하기</button>
+                        <AddBtn onClick={_addContent}>저장하기</AddBtn>
                     )}
                 </div>
             </ModalBG>
@@ -219,8 +219,15 @@ word-break: break-word;
 }
 `;
 
+const ColorBtnDiv =styled.div`
+margin: auto;
+display: flex;
+flex-direction: row;
+justify-content: center;
 
-const ColorButton = styled.button`
+`;
+
+const ColorBtn = styled.button`
 width:25px;
 height:25px;
 border-radius: 100px;
@@ -234,22 +241,37 @@ cursor: pointer;
   &:hover{
     opacity: 1;
   }
-  &:focus{
-    opacity: 1;
-  }
   @media only screen and (max-width: 680px) {
     width: 20px;
     height: 20px;
   }
-  
-//   &:visited {
-//     background-color: #afa6a0;
-//     box-shadow: 0px 15px 20px #e0e0e0;
-//     color: #fff;
-//     // transform: translateY(-3px);
-//   }
 background-color: ${(props) => props.color};
-`
+`;
+
+const AddBtn = styled.button`
+display: block;
+margin: auto;
+width: 100px;
+height: 30px;
+font-family: 'Roboto', sans-serif;
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 2px;
+font-weight: 500;
+color: #655f5b;
+background-color: #fff;
+border: none;
+border-radius: 5px;
+box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.1);
+cursor: pointer;
+outline: none;
+
+&:hover {
+    background-color: #efc19b;
+    box-shadow: 0px 15px 20px #e0e0e0;
+    color: #fff;
+  }
+`;
 
 
 
