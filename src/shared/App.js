@@ -43,8 +43,8 @@ function App() {
         <ConnectedRouter history={history}>
             {
                 is_login
-                    ? (<Route path="/" exact="exact" component={Main}/>)
-                    : (<Route path="/login" exact="exact" component={User}/>)
+                    ? (<Route path="/" exact component={Main}/>)
+                    : (<Route path="/login" exact component={User}/>)
             }
         </ConnectedRouter>
 
