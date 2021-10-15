@@ -15,8 +15,7 @@ import Header from "../components/Header";
 import {detailShow} from "../redux/modules/show";
 import {actionCreators as calendarAction} from "../redux/modules/calendar";
 import showError from "../redux/modules/error";
-import { history } from "../redux/configureStore";
-
+import {history} from "../redux/configureStore";
 
 const Main = (props) => {
     const dispatch = useDispatch();
@@ -46,7 +45,7 @@ const Main = (props) => {
     const thisMonthEventList = useSelector((state) => state.calendar.list);
     const testButton = () => {
         console.log("[Main] this month list:::", thisMonthEventList);
-    }
+    };
 
     //서버로 부터 데이터 받아오기
     React.useEffect(() => {
@@ -66,15 +65,14 @@ const Main = (props) => {
         // console.error(err);   });
         dispatch(calendarAction.setCalendarMW(_today));
         console.log(":::getCalendar is updated:::");
+    }, [edit_list, delCount]);
 
-    }, [edit_list, delCount])
-
-    console.log("[useEffect] newlist:::", new_list)
+    console.log("[useEffect] newlist:::", new_list);
 
     React.useEffect(() => {
         setList(new_list);
         console.log(":::setList = new_list is updated:::");
-    }, [is_get])
+    }, [is_get]);
 
     // Modal창 열기 함수 const modalOpen = (info) => {   setTarget_date(info.dateStr);
     // console.log(target_date);   setVisible(true);
@@ -100,16 +98,21 @@ const Main = (props) => {
             minute: "2-digit"
         });
         console.log(now_month);
-        apis.getPostAX({
-            params: {
-                date: now_month
-            }
-        }).then((res)=>{
-            if(res.status >= 400){
-                showError(res.status,res.data.msg);
-                history.push('/error');
-              }
-        });
+        apis
+            .getPostAX({
+                params: {
+                    date: now_month
+                }
+            })
+            .then((res) => {
+                if (res.status >= 400) {
+                    showError(res.status, res.data.msg);
+                    history.push('/error');
+                    return null;
+                }
+                const post_list = res.data;
+                setList(post_list);
+            });
     };
     //캘린더 익월로 이동하기 버튼
     const NextButton = () => {
@@ -126,11 +129,17 @@ const Main = (props) => {
             minute: "2-digit"
         });
         console.log(now_month);
-        apis.getPostAX({
-            params: {
-                date: now_month
-            }
-        });
+        apis
+            .getPostAX({
+                params: {
+                    date: now_month
+                }
+            })
+            .then((res) => {
+                const post_list = res.data;
+                console.log(post_list);
+                setList(post_list);
+            });
     };
 
     return (
