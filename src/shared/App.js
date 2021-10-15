@@ -33,9 +33,9 @@ function App() {
           setstate(true);
           history.push("/");
         }
-      });
+      }, []);
     }
-  }, []);
+  });
   //~ 여기까지 주석처리 하면 됩니다.
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { apis } from "../lib/axios";
@@ -24,8 +24,11 @@ const Main = (props) => {
   const Detail_control = useSelector((state) => state.show.detail);
   const Add_control = useSelector((state) => state.show.add);
   const new_list = useSelector((state) => state.calendar.list);
+  const edit_list = useSelector((state) => state.calendar.editList);
+  const is_get = useSelector((state) => state.calendar.is_get);
+  const delCount = useSelector((state) => state.detail.delCount);
 
-  const [postList, setList] = React.useState(new_list);
+  const [postList, setList] = React.useState();
   const [target_date, setTarget_date] = React.useState();
 
   const red_list = new_list.filter((event) => event.color === "#DD6262");
@@ -35,6 +38,7 @@ const Main = (props) => {
   const gray_list = new_list.filter((event) => event.color === "#818D90");
   const purple_list = new_list.filter((event) => event.color === "#9F70BC");
 
+  // console.log(postList); console.log(new_list);
   const goToDetail = (info) => {
     setTarget_date(info.dateStr);
     dispatch(detailShow(true));
@@ -58,17 +62,19 @@ const Main = (props) => {
         minute: "2-digit",
       }
     );
-
-    apis.getPostAX({ params: { date: _today } }).then((res) => {
-      const post_list = res.data;
-      setList(...postList, post_list);
-      console.log(post_list);
-    });
     // apis   .getPostAX({ params: { date: _today } })   .then((res) => {     const
     // post = res.data;     setList(...list, post);   })   .catch((err) => {
     // console.error(err);   });
     dispatch(calendarAction.setCalendarMW(_today));
-  }, [dispatch]);
+    console.log(":::getCalendar is updated:::");
+  }, [edit_list, delCount]);
+
+  console.log("[useEffect] newlist:::", new_list);
+
+  React.useEffect(() => {
+    setList(new_list);
+    console.log(":::setList = new_list is updated:::");
+  }, [is_get]);
 
   // Modal창 열기 함수 const modalOpen = (info) => {   setTarget_date(info.dateStr);
   // console.log(target_date);   setVisible(true);
@@ -104,8 +110,6 @@ const Main = (props) => {
       .then((res) => {
         const post_list = res.data;
         setList(post_list);
-        console.log(postList);
-        console.log(post_list);
       });
   };
   //캘린더 익월로 이동하기 버튼
@@ -123,7 +127,7 @@ const Main = (props) => {
         minute: "2-digit",
       }
     );
-
+    console.log(now_month);
     apis
       .getPostAX({
         params: {
@@ -132,9 +136,8 @@ const Main = (props) => {
       })
       .then((res) => {
         const post_list = res.data;
-        setList(post_list);
-        console.log(postList);
         console.log(post_list);
+        setList(post_list);
       });
   };
 
