@@ -49,7 +49,7 @@ const Login = () => {
                     <Text fontSize="5.3rem">Diary</Text>
                 </StyledTitle>
                 <StyledLabel>
-                    <Grid width="75px">
+                    <Grid width="80px">
                         <Text fontSize="3rem" color="#967A6D">ID</Text>
                     </Grid>
                     <Grid>
@@ -57,7 +57,7 @@ const Login = () => {
                     </Grid>
                 </StyledLabel>
                 <StyledLabel>
-                    <Grid width="75px">
+                    <Grid width="80px">
                         <Text fontSize="3rem" color="#967A6D">PW</Text>
                     </Grid>
                     <Grid>

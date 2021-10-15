@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Grid = (props) => {
 
-    const { display, width, height, margin, padding, backGround, children, border, borderRadius } = props;
+    const { display, width, margin, padding, backGround, children, style, height } = props;
     const styles = {
         display: display,
         width: width,
@@ -11,13 +11,11 @@ const Grid = (props) => {
         margin: margin,
         padding: padding,
         backGround: backGround,
-        border: border,
-        borderRadius:borderRadius,
-
+        style: style,
     };
 
     return (
-        <StyledGrid {...styles}>{children}</StyledGrid>
+        <StyledGrid {...style} {...styles}>{children}</StyledGrid>
     )
 }
 

@@ -1,33 +1,51 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import {useDispatch, useSelector} from "react-redux";
+import {useHistory} from "react-router";
 import styled from "styled-components";
 
-import { actionCreators as detailActions } from "../redux/modules/detail";
-import { addShow, detailShow } from "../redux/modules/show";
+import {actionCreators as detailActions} from "../redux/modules/detail";
+import {actionCreators as addActions} from "../redux/modules/calendar";
+import {actionCreators as editActions} from "../redux/modules/calendar";
+import {addShow, detailShow} from "../redux/modules/show";
 import { Input, Grid, Text, Button } from "../elements";
-
 
 const Add = (props) => {
 
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const thisMonthEventList = useSelector((state) => state.calendar.list);
+    const testButton = () => {
+        console.log("this month list:::", thisMonthEventList);
+    }
 
     const editPost = useSelector((state) => {
         console.log(state.detail)
         return state.detail.editList
     });
-    const is_edit = editPost._id ? true : false;
-    // console.log("편집데이터가져오기", editPost);
-    // console.log("이즈에딧확인하기", is_edit);
+    const is_edit = editPost._id
+        ? true
+        : false;
+    // console.log("편집데이터가져오기", editPost); console.log("이즈에딧확인하기", is_edit);
 
-
-    const [title, setTitle] = React.useState(is_edit ? editPost.title : "");
-    const [content, setContent] = React.useState(is_edit ? editPost.content : "");
-    const [color, setColor] = React.useState(is_edit ? editPost.color : "#DD6262");
-    // const [editTitle, setEditTitle] = React.useState(is_edit? editPost.title : "");
-    // const [editContent, setEditContent] = React.useState(is_edit? editPost.content : "");
+    const [title, setTitle] = React.useState(
+        is_edit
+            ? editPost.title
+            : ""
+    );
+    const [content, setContent] = React.useState(
+        is_edit
+            ? editPost.content
+            : ""
+    );
+    const [color, setColor] = React.useState(
+        is_edit
+            ? editPost.color
+            : "#DD6262"
+    );
+    // const [editTitle, setEditTitle] = React.useState(is_edit? editPost.title :
+    // ""); const [editContent, setEditContent] = React.useState(is_edit?
+    // editPost.content : "");
 
     const date = props.date;
     
@@ -57,19 +75,22 @@ const Add = (props) => {
         
     }
 
-
     const _addContent = () => {
-        dispatch(detailActions.addContentMW(post))
+        dispatch(detailActions.addContentMW(post));
+        dispatch(addActions.addCalendarMW(post));
         window.alert("저장완료");
         dispatch(detailShow(true));
         dispatch(addShow(false));
     }
 
     const _udtContent = () => {
-        const id = editPost._id
-        console.log("업데이트넘겨주는포스트", post)
+        const id = editPost
+            ._id
+            console
+            .log("업데이트넘겨주는포스트", post)
         console.log("업데이트넘겨주는아이디", id)
         dispatch(detailActions.udtContentMW(id, post))
+        // dispatch(editActions.editCalendarMW(id,post)) editCalendarMW
         window.alert("수정완료");
         dispatch(detailShow(true));
         dispatch(addShow(false));
@@ -193,7 +214,7 @@ background-color: #ffffff;
 box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
 box-sizing: border-box;
 word-break: break-word;
-&: focus {
+&:focus {
     outline: none;
     box-shadow: 0 0 0px 2px #efc19b; 
 }
@@ -213,7 +234,7 @@ resize: none;
 box-sizing: border-box;
 overflow: hidden;
 word-break: break-word;
-&: focus {
+&:focus {
     outline: none;
     box-shadow: 0 0 0px 2px #efc19b; 
 }

@@ -6,6 +6,7 @@ import show from "./modules/show";
 import user from "./modules/user";
 import Detail from "./modules/detail";
 import calendar from "./modules/calendar";
+import Error_ from "./modules/error"
 
 //만든 히스토리와 라우터가 연결. 스토어에 브라우저 히스토리가 저장되는 것.
 export const history = createBrowserHistory();
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   user: user,
   detail: Detail,
   calendar: calendar,
+  Error_:Error_,
   router: connectRouter(history),
 });
 

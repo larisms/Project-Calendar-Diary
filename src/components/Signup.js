@@ -28,6 +28,7 @@ const Signup = () => {
     const [ID, setID] = React.useState();
     const [PW, setPW] = React.useState();
     const [confirmPW, setConfirmPW] = React.useState();
+    const [disabled, setDisabled] = React.useState(false);
 
     //경고문 변화 1초단위로 감지
     const valueID = React.useCallback(_.debounce((e) => {
@@ -36,12 +37,16 @@ const Signup = () => {
         if (!eng.test(value)) {
             dispatch(signupAction.changeWarnID("영어만 입력해주세요"))
             setPassID('fail')
+            setDisabled(true)
         } else if (value.length < 4) {
             dispatch(signupAction.changeWarnID("4자 이상 입력해주세요"))
             setPassID('fail')
+            setDisabled(true)
         } else {
             dispatch(signupAction.changeWarnID(""));
             setPassID("success")
+            setDisabled(false)
+
         }
     }, 1000), [])
 
@@ -67,7 +72,6 @@ const Signup = () => {
         console.log(ID);
         valuePW(e);
         setPW(e.target.value);
-
     }
     const onChangeConfirmPW = (e) => {
         setConfirmPW(e.target.value);
@@ -75,6 +79,7 @@ const Signup = () => {
 
     //중복확인 클릭시
     const overlap = () => {
+        if(ID === ""){}
         console.log("overlap ID :::", ID);
         dispatch(signupAction.checkOverlapMW(ID))
     }
@@ -103,7 +108,7 @@ const Signup = () => {
         dispatch(signupShow(false));
         dispatch(loginShow(true));
     }
-
+    const emptyEvent = () => {}
     return (
         <React.Fragment>
             <StyledSection>
@@ -119,8 +124,8 @@ const Signup = () => {
                     <Grid>
                         <StyledSpan>{warnID}</StyledSpan>
                         <Grid>
-                            <Input type="text" onChange={onChangeID}/>
-                            <StyledOverlap onClick={overlap}>중복확인</StyledOverlap>
+                            <Input type="text" onChange={onChangeID} onSubmit={!disabled?overlap:emptyEvent}/>
+                            <StyledOverlap onClick={overlap} disabled={disabled}>중복확인</StyledOverlap>
                         </Grid>
 
                     </Grid>
@@ -135,7 +140,7 @@ const Signup = () => {
                     </Grid>
                     <Grid>
                         <StyledSpan>{warnPW}</StyledSpan>
-                        <Input type="password" onChange={onChangePW}/>
+                        <Input type="password" onChange={onChangePW} onSubmit={signup}/>
 
                     </Grid>
                 </StyledLabel>
@@ -147,9 +152,9 @@ const Signup = () => {
                     <Grid>
                         <Text fontSize="3rem" color="#967A6D">confirm PW</Text>
                     </Grid>
-                    <Grid>
-                        <StyledSpan>{warnCheckPW}</StyledSpan>
-                        <Input type="password" onChange={onChangeConfirmPW}/>
+                    <Grid >
+                        <StyledSpan className="confirm">{warnCheckPW}</StyledSpan>
+                        <Input type="password" onChange={onChangeConfirmPW} onSubmit={signup}/>
                     </Grid>
                 </StyledLabel>
                 <Grid margin="95px 0 0 0">
@@ -190,6 +195,15 @@ color: #818D90;
 position:absolute;
 right: 0;
 top:0;
+@media only screen and (max-width: 950px) {
+    &.confirm {
+        top:88px;
+        
+
+
+    }
+}
+
 
 `
 

@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 
 import { actionCreators as detailActions } from "../redux/modules/detail";
+import { actionCreators as editActions } from "../redux/modules/calendar";
 import { addShow, detailShow } from "../redux/modules/show";
 import { Input, Grid, Text, Button } from "../elements";
 
