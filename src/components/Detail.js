@@ -129,6 +129,7 @@ box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
 `;
 
 const Wrap = styled.div`
+height: 100%;
 width: 100%;
 padding: 14px;
 overflow-x: hidden;

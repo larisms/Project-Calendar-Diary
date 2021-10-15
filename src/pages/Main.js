@@ -156,7 +156,6 @@ const Main = (props) => {
 
     return (
         <React.Fragment>
-            <button onClick={testButton}>테스트 버튼</button>
             {
                 Detail_control
                     ? <Detail date={target_date}/>
