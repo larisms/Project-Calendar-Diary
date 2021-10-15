@@ -142,6 +142,18 @@ const Main = (props) => {
             });
     };
 
+    const addClass = (e) => {
+        const siblings = t => [...t.parentElement.children].filter(e => e != t);
+        siblings(e.target).map((x)=>{
+            const class_ = String(x.classList[0]+" "+x.classList[1])
+            if(x.classList[2] === "on"){
+                x.setAttribute('class',class_)
+            }
+        });
+        e.target.classList.add("on");
+        
+    }
+
     return (
         <React.Fragment>
             <button onClick={testButton}>테스트 버튼</button>
@@ -170,7 +182,8 @@ const Main = (props) => {
                         style={{
                             background: "#DD6262"
                         }}
-                        onClick={() => {
+                        onClick={(e) => {
+                            addClass(e);
                             setList(red_list);
                         }}></Button>
                     <Button
@@ -179,7 +192,8 @@ const Main = (props) => {
                         style={{
                             background: "#B07255"
                         }}
-                        onClick={() => {
+                        onClick={(e) => {
+                            addClass(e);
                             setList(brown_list);
                         }}></Button>
                     <Button
@@ -188,7 +202,8 @@ const Main = (props) => {
                         style={{
                             background: "#6C9D68"
                         }}
-                        onClick={() => {
+                        onClick={(e) => {
+                            addClass(e);
                             setList(green_list);
                         }}></Button>
                     <Button
@@ -197,7 +212,8 @@ const Main = (props) => {
                         style={{
                             background: "#6A96B8"
                         }}
-                        onClick={() => {
+                        onClick={(e) => {
+                            addClass(e);
                             setList(blue_list);
                         }}></Button>
                     <Button
@@ -206,7 +222,8 @@ const Main = (props) => {
                         style={{
                             background: "#818D90"
                         }}
-                        onClick={() => {
+                        onClick={(e) => {
+                            addClass(e);
                             setList(gray_list);
                         }}></Button>
                     <Button
@@ -215,7 +232,8 @@ const Main = (props) => {
                         style={{
                             background: "#9F70BC"
                         }}
-                        onClick={() => {
+                        onClick={(e) => {
+                            addClass(e);
                             setList(purple_list);
                         }}></Button>
                     <Button
@@ -225,7 +243,8 @@ const Main = (props) => {
                             background: "#FFFFFF",
                             border: "1px solid black"
                         }}
-                        onClick={() => {
+                        onClick={(e) => {
+                            addClass(e);
                             setList(new_list);
                         }}></Button>
                 </ButtonArea>

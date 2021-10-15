@@ -79,6 +79,7 @@ const Signup = () => {
 
     //중복확인 클릭시
     const overlap = () => {
+        if(ID === ""){}
         console.log("overlap ID :::", ID);
         dispatch(signupAction.checkOverlapMW(ID))
     }
