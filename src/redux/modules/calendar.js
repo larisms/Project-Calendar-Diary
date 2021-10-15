@@ -1,6 +1,7 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from "immer";
 import {apis} from "../../lib/axios";
+import showError from "./error";
 
 //Action
 const SET_CALENDAR = "SET_CALENDAR";
@@ -26,7 +27,7 @@ const initialState = {
 };
 
 const setCalendarMW = (_today) => {
-    return function (dispatch) {
+    return function (dispatch,{history}) {
         apis
             .getPostAX({
                 params: {
@@ -34,6 +35,12 @@ const setCalendarMW = (_today) => {
                 }
             })
             .then((res) => {
+                if(res.status >= 400){
+                    showError(res.status,res.data.msg);
+                    history.push('/error');
+                    return;
+                }
+
                 const post_list = res.data;
                 const new_list = post_list.map((l, idx) => {
                     return {_id: idx, date: l.date, title: l.title, color: l.color};

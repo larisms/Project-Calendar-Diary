@@ -11,13 +11,12 @@ import {formatDate} from "@fullcalendar/common";
 import Detail from "../components/Detail";
 import Add from "../components/Add";
 import Header from "../components/Header";
-import {Grid} from "../elements";
-import {detailShow, addShow} from "../redux/modules/show";
-import {actionCreators as loginAction} from "../redux/modules/user";
-import {actionCreators as calendarAction} from "../redux/modules/calendar";
-import {actionCreators as detailActions} from "../redux/modules/detail";
 
-import {actionCreators} from "../redux/modules/detail";
+import {detailShow} from "../redux/modules/show";
+import {actionCreators as calendarAction} from "../redux/modules/calendar";
+import showError from "../redux/modules/error";
+import { history } from "../redux/configureStore";
+
 
 const Main = (props) => {
     const dispatch = useDispatch();
@@ -105,6 +104,11 @@ const Main = (props) => {
             params: {
                 date: now_month
             }
+        }).then((res)=>{
+            if(res.status >= 400){
+                showError(res.status,res.data.msg);
+                history.push('/error');
+              }
         });
     };
     //캘린더 익월로 이동하기 버튼

@@ -3,6 +3,7 @@ import {produce} from "immer";
 import {apis} from "../../lib/axios";
 
 import {actionCreators as editAction} from "./calendar"
+import showError from "./error";
 
 const SET_CONTENT = "SET_CONTENT";
 const ADD_CONTENT = "ADD_CONTENT";
@@ -38,6 +39,11 @@ const setContentMW = (date) => {
                 }
             })
             .then((res) => {
+                if(res.status >= 400){
+                    showError(res.status,res.data.msg);
+                    history.push('/error');
+                    return;
+                }
                 const _post_list = res
                 console.log("리스폰스", _post_list);
                 const post_list = res.data;
@@ -56,6 +62,11 @@ const addContentMW = (post) => {
         apis
             .addContentAX(post)
             .then((res) => {
+                if(res.status >= 400){
+                    showError(res.status,res.data.msg);
+                    history.push('/error');
+                    return;
+                }
                 dispatch(addContent(post));
                 // console.log("[detail.js] addContentAX :::", res);
             })
@@ -71,6 +82,11 @@ const udtContentMW = (id, post) => {
         apis
             .udtContentAX(id, post)
             .then((res) => {
+                if(res.status >= 400){
+                    showError(res.status,res.data.msg);
+                    history.push('/error');
+                    return;
+                }
                 console.log(post)
                 dispatch(udtContent(id, post));
                 dispatch(editAction.editCalendar(post))
@@ -82,7 +98,7 @@ const udtContentMW = (id, post) => {
 };
 
 const delContentMW = (id) => {
-    return function (dispatch, {histroy}) {
+    return function (dispatch, {history}) {
         console.log("포스트아이디넘겨받기", id);
         apis
             .delContentAX({
@@ -91,6 +107,11 @@ const delContentMW = (id) => {
                 }
             })
             .then((res) => {
+                if(res.status >= 400){
+                    showError(res.status,res.data.msg);
+                    history.push('/error');
+                    return;
+                }
                 console.log("알이에스", res);
                 dispatch(delContent(id));
             })
