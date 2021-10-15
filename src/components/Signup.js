@@ -72,7 +72,6 @@ const Signup = () => {
         console.log(ID);
         valuePW(e);
         setPW(e.target.value);
-
     }
     const onChangeConfirmPW = (e) => {
         setConfirmPW(e.target.value);
@@ -152,8 +151,8 @@ const Signup = () => {
                     <Grid>
                         <Text fontSize="3rem" color="#967A6D">confirm PW</Text>
                     </Grid>
-                    <Grid>
-                        <StyledSpan>{warnCheckPW}</StyledSpan>
+                    <Grid >
+                        <StyledSpan className="confirm">{warnCheckPW}</StyledSpan>
                         <Input type="password" onChange={onChangeConfirmPW} onSubmit={signup}/>
                     </Grid>
                 </StyledLabel>
@@ -195,6 +194,15 @@ color: #818D90;
 position:absolute;
 right: 0;
 top:0;
+@media only screen and (max-width: 950px) {
+    &.confirm {
+        top:88px;
+        
+
+
+    }
+}
+
 
 `
 

@@ -54,6 +54,10 @@ border-radius: 10px 10px 50px 10px;
 border: none;
 padding: 0 20px;
 box-sizing: border-box;
+
+&:focus{
+    outline:2px solid #818D90;
+}
 `;
 
 export default Input;
