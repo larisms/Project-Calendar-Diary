@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { apis } from "../lib/axios";
@@ -35,8 +35,6 @@ const Main = (props) => {
   const gray_list = new_list.filter((event) => event.color === "#818D90");
   const purple_list = new_list.filter((event) => event.color === "#9F70BC");
 
-  console.log(postList);
-  console.log(new_list);
   const goToDetail = (info) => {
     setTarget_date(info.dateStr);
     dispatch(detailShow(true));
@@ -97,11 +95,18 @@ const Main = (props) => {
       }
     );
     console.log(now_month);
-    apis.getPostAX({
-      params: {
-        date: now_month,
-      },
-    });
+    apis
+      .getPostAX({
+        params: {
+          date: now_month,
+        },
+      })
+      .then((res) => {
+        const post_list = res.data;
+        setList(post_list);
+        console.log(postList);
+        console.log(post_list);
+      });
   };
   //캘린더 익월로 이동하기 버튼
   const NextButton = () => {
@@ -118,12 +123,19 @@ const Main = (props) => {
         minute: "2-digit",
       }
     );
-    console.log(now_month);
-    apis.getPostAX({
-      params: {
-        date: now_month,
-      },
-    });
+
+    apis
+      .getPostAX({
+        params: {
+          date: now_month,
+        },
+      })
+      .then((res) => {
+        const post_list = res.data;
+        setList(post_list);
+        console.log(postList);
+        console.log(post_list);
+      });
   };
 
   return (
