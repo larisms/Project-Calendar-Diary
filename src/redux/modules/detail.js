@@ -2,6 +2,8 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../lib/axios";
 
+import {actionCreators as editAction } from "./calendar"
+
 const SET_CONTENT = "SET_CONTENT";
 const ADD_CONTENT = "ADD_CONTENT";
 const DEL_CONTENT = "DEL_CONTENT";
@@ -19,6 +21,7 @@ const delContent = createAction(DEL_CONTENT, (id) => ({ id }));
 const initialState = {
   list: [{}],
   editList: [],
+  delCount: []
 };
 
 const initialPost = {};
@@ -62,7 +65,9 @@ const udtContentMW = (id, post) => {
     apis
       .udtContentAX(id, post)
       .then((res) => {
+        console.log(post)
         dispatch(udtContent(id, post));
+        dispatch(editAction.editCalendar(post))
       })
       .catch((err) => {
         console.log("업데이트에러", err);
@@ -133,7 +138,11 @@ export default handleActions(
         if (target_idx !== -1) {
           console.log("삭제 타겟인덱스", target_idx)
           draft.list.splice(target_idx, 1);
+          draft.delCount = Number(draft.delCount)+1
         }
+        
+        console.log(draft.delCount)
+        
       }),
   },
   initialState

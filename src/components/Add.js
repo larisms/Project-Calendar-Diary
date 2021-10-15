@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import { actionCreators as detailActions } from "../redux/modules/detail";
 import { actionCreators as addActions } from "../redux/modules/calendar";
+import { actionCreators as editActions } from "../redux/modules/calendar";
 import { addShow, detailShow } from "../redux/modules/show";
 
 
@@ -63,10 +64,14 @@ const Add = (props) => {
         console.log("업데이트넘겨주는포스트", post)
         console.log("업데이트넘겨주는아이디", id)
         dispatch(detailActions.udtContentMW(id, post))
+        // dispatch(editActions.editCalendarMW(id,post))
+        // editCalendarMW
         window.alert("수정완료");
         dispatch(detailShow(true));
         dispatch(addShow(false));
         dispatch(detailActions.delEdit(id, post))  
+
+        // window.location.reload();
     }
 
     const clickColor = (e) => {
@@ -76,7 +81,7 @@ const Add = (props) => {
 
     return (
         <React.Fragment>
-            <button onClick={testButton}>테스트버튼</button>
+    
             <p>{date}</p>
             <div>
                 <input

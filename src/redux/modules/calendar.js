@@ -5,22 +5,27 @@ import { get } from "lodash";
 
 
 
+
 //Action
 const SET_CALENDAR = "SET_CALENDAR";
 const ADD_CALENDAR = "ADD_CALENDAR";
+const EDIT_CALENDAR = "EDIT_CALENDAR";
+const DETAIL_CALENDAR = "DETAIL_CALENDAR";
 
 //Action Creator
 const setCalendar = createAction(SET_CALENDAR, (post_list) => ({ post_list }));
 const addCalendar = createAction(ADD_CALENDAR, (post) => ({ post }));
+const editCalendar = createAction(EDIT_CALENDAR, (post) => ({ post }));
+const detailCalendar = createAction(DETAIL_CALENDAR, (detail) => ({ detail }));
 
 const initialState = {
   list: [
     {
-      title: "테스트1",
-      date: "2021-10-13",
-      color: "red",
+      
     },
   ],
+  editList :[],
+  detailList:[],
 };
 
 const setCalendarMW = (_today) => {
@@ -31,7 +36,7 @@ const setCalendarMW = (_today) => {
         const post_list = res.data;
         const new_list = post_list.map((l,idx)=>{
           return {
-            _id:idx, date:l.date, title:l.title, color:l.color
+            _id:l._id, date:l.date, title:l.title, color:l.color
           }
         })
         console.log("this month list New:::",new_list);
@@ -63,6 +68,48 @@ const addCalendarMW = (post) => {
   }
 }
 
+const editCalendarMW = (id,post) => {
+  return function (dispatch, getState, {history}){
+
+    dispatch(editCalendar(post))
+    
+    const detailState = getState().calendar.detailList //상세창 이벤트 목록
+    const allListState = getState().calendar.list  //현재 캘린더의 모든 이벤트 목록
+    const filterList = allListState.filter((x) => x.date === post.date); //수정한 이벤트(a)의 날짜와 맞는 캘린더의 이벤트 목록들 = x
+    const postIndex = detailState.findIndex((x)=> x._id === id); //a가 상세창에서 몇번째? == n
+    const targetID = filterList[postIndex]; // x[n]의 _id 값
+    // const targetIndex = allListState.findIndex((x)=>x._id === targetID)
+
+    // const afterEditPost = getState().calendar.editCalendar
+
+    // console.log("[module calendar] edit Detail:::", detailState);
+    // console.log("[module calendar] edit All:::", filterList);
+    // console.log("[module calendar] edit postIndex in Detail:::", postIndex);
+    // console.log("[module calendar] edit targetIndex:::", targetIndex);
+    console.log("[module calendar] edit before allListState:::", allListState);
+    console.log("[module calendar] edit targetID:::", targetID);
+
+    // allListState.splice(targetIndex,1,afterEditPost);
+
+    // console.log("[module calendar] edit after allListState:::", afterEditPost);
+
+
+    // console.log("[module calendar] State:::", State)
+
+    // const Post = {_id:State.length+1, date:post.date, title:post.title, color:post.color }
+    // const newList = [...State,Post]
+
+    // const List = newList.map((l, idx)=>{
+    //   return{
+    //     _id:l._id, date:l.date, title:l.title, color:l.color
+    //   }
+    // })
+    
+    // dispatch(editCalendar(List))
+    // console.log("[module calendar] List ::: ",List)
+  }
+}
+
 export default handleActions(
   {
     [SET_CALENDAR]: (state, action) =>
@@ -73,6 +120,18 @@ export default handleActions(
       produce(state, (draft) => {
       draft.list = action.payload.post;
     }),
+    [DETAIL_CALENDAR]: (state, action) =>
+      produce(state, (draft) => {
+      draft.detailList = action.payload.detail;
+      console.log("detail list :::", draft.detailList);
+    }),
+    [EDIT_CALENDAR]: (state, action) =>
+      produce(state, (draft) => {
+        draft.editList = action.payload.post;
+      // draft.detailList = action.payload.detail;
+      // console.log("detail list :::", draft.detailList);
+      // console.log("[calendar] edit post :::", action.payload.post)
+    }),
   },
   initialState
 );
@@ -82,6 +141,9 @@ const actionCreators = {
   setCalendarMW,
   addCalendar,
   addCalendarMW,
+  editCalendarMW,
+  detailCalendar,
+  editCalendar
 };
 
 export { actionCreators };

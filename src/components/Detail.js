@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
 import { actionCreators as detailActions } from "../redux/modules/detail";
+import { actionCreators as editActions } from "../redux/modules/calendar";
 import { addShow, detailShow } from "../redux/modules/show";
 import { Input, Grid, Text, Button } from "../elements";
 
@@ -49,7 +50,7 @@ const Detail = (props) => {
             <p>{date}</p>
             {post_list.map((p, idx) => {
                 return (
-                    <div>
+                    <div key={idx}>
                         <Text fontSize="20px">{p.title}</Text>
                         <Text fontSize="20px">{p.content}</Text>
                         {/* <button title={p.title} onClick={(e) => {
@@ -58,9 +59,11 @@ const Detail = (props) => {
 
                         <button onClick={() => {
                             dispatch(detailActions.editContent(p));
+                            dispatch(editActions.detailCalendar(post_list))
                             goToAdd();
                             console.log("수정온클릭 피피피", p);
                             console.log("수정온클릭 피 아이디", p._id);
+
                         }}>수정</button>
 
                         <button key={p._id} onClick={() => {

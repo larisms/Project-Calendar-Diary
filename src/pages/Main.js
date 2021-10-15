@@ -24,6 +24,8 @@ const Main = (props) => {
     const Detail_control = useSelector((state) => state.show.detail);
     const Add_control = useSelector((state) => state.show.add);
     const new_list = useSelector((state) => state.calendar.list);
+    const edit_list = useSelector((state) => state.calendar.editList);
+    const delCount = useSelector((state) => state.detail.delCount);
 
     const [list, setList] = React.useState([]);
     const [target_date, setTarget_date] = React.useState();
@@ -38,7 +40,6 @@ const Main = (props) => {
   const goToDetail = (info) => {
     setTarget_date(info.dateStr);
     dispatch(detailShow(true));
-    
   };
 
   const thisMonthEventList = useSelector((state)=>state.calendar.list);
@@ -63,7 +64,7 @@ const Main = (props) => {
         // post = res.data;     setList(...list, post);   })   .catch((err) => {
         // console.error(err);   });
         dispatch(calendarAction.setCalendarMW(_today));
-    }, []);
+    }, [edit_list,delCount]);
 
     // Modal창 열기 함수 const modalOpen = (info) => {   setTarget_date(info.dateStr);
     // console.log(target_date);   setVisible(true);
@@ -119,7 +120,7 @@ const Main = (props) => {
 
     return (
         <React.Fragment>
-          <button onClick={testButton}>테스트 버튼</button>
+
             {
                 Detail_control
                     ? <Detail date={target_date}/>
