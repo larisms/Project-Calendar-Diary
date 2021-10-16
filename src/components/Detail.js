@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
+import { Input, Grid, Text, Button } from "../elements";
+
 import { actionCreators as detailActions } from "../redux/modules/detail";
 import { actionCreators as editActions } from "../redux/modules/calendar";
 import { addShow, detailShow } from "../redux/modules/show";
-import { Input, Grid, Text, Button } from "../elements";
+
 
 
 const Detail = (props) => {
@@ -42,12 +44,17 @@ const Detail = (props) => {
         dispatch(addShow(true));
     };
 
+    const goToTop = () => {
+        scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+    }
+
 
 
     return (
         <React.Fragment>
             <ModalBG>
                 <DiaryHead>
+                    <GoToTop onClick={goToTop}>{'<'}</GoToTop>
                     <DiaryDate >{date}</DiaryDate>
                     <CloseBtn onClick={exitDetail}>+</CloseBtn>
                 </DiaryHead>
@@ -79,9 +86,7 @@ const Detail = (props) => {
                         )
                     })}
                     <TopBtnDiv>
-                        <ToTopBtn onClick={() => {
-                            scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });;
-                        }}>top</ToTopBtn>
+                        <ToTopBtn onClick={goToTop}>top</ToTopBtn>
                     </TopBtnDiv>
                     <AddBtn onClick={goToAdd}>추가</AddBtn>
                 </Wrap>
@@ -89,24 +94,6 @@ const Detail = (props) => {
         </React.Fragment >
     )
 };
-
-
-const DiaryHead = styled.div`
-width: 100%;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
-margin: 5px 0px;
-`;
-
-const DiaryDate = styled.p`
-font-family: 'Song Myung', serif;
-color: #655f5b;
-font-weight: 600;
-font-size: 20px;
-white-space: pre-wrap;
-`;
 
 const ModalBG = styled.div` 
 position: fixed; 
@@ -127,6 +114,66 @@ border-radius: 10px;
 box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
 
 `;
+
+const DiaryHead = styled.div`
+width: 100%;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+margin: 5px 0px;
+`;
+
+const GoToTop = styled.button`
+width: 40px;
+height: 40px;
+margin: 0px 0px 0px 3px;
+font-family: 'Roboto', sans-serif;
+font-size: 28px;
+font-weight: 500;
+color: #655f5b;
+background-color: #ffffff00;
+transform: rotate(90deg);
+border: none;
+border-radius: 5px;
+cursor: pointer;
+outline: none;
+
+&:hover {
+    color: #ffac65;
+  }
+`;
+
+const DiaryDate = styled.p`
+margin: auto;
+font-family: 'Song Myung', serif;
+color: #655f5b;
+font-weight: 600;
+font-size: 20px;
+white-space: pre-wrap;
+`;
+
+const CloseBtn = styled.button`
+width: 40px;
+height: 40px;
+margin: 0px 0px 0px 3px;
+font-family: 'Roboto', sans-serif;
+font-size: 40px;
+letter-spacing: 2px;
+font-weight: 500;
+color: #655f5b;
+background-color: #ffffff00;
+border: none;
+border-radius: 5px;
+transform: rotate(45deg);
+cursor: pointer;
+outline: none;
+
+&:hover {
+    color: #ffac65;
+  }
+`;
+
 
 const Wrap = styled.div`
 height: 100%;
@@ -151,29 +198,7 @@ overflow-y: auto;
 } 
 `;
 
-const CloseBtn = styled.button`
-width: 40px;
-height: 40px;
-margin: 0px 0px 0px 3px;
-font-family: 'Roboto', sans-serif;
-font-size: 40px;
-letter-spacing: 2px;
-font-weight: 500;
-color: #655f5b;
-background-color: #ffffff00;
-border: none;
-border-radius: 5px;
-// box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.1);
-transform: rotate(45deg);
-cursor: pointer;
-outline: none;
 
-&:hover {
-    
-    // box-shadow: 0px 15px 20px #e0e0e0;
-    color: #ffac65;
-  }
-`;
 
 const DiaryCard = styled.div`
 border: 1px solid #e0c9b6;
