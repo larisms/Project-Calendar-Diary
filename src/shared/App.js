@@ -62,8 +62,8 @@ function App() {
                     ? (<Route path="/" exact component={Main}/>)
                     : (<Route path="/login" exact component={User}/>)
             }
-            <Route path="/error404" exact="exact" component={Error}/>
-            <Route path="/error500" exact="exact" component={Error_}/>
+            <Route path="/error404" exact component={Error}/>
+            <Route path="/error500" exact component={Error_}/>
         </ConnectedRouter>
 
     );

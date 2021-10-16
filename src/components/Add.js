@@ -79,11 +79,7 @@ const Add = (props) => {
         if (!post.title) {
             window.alert("제목을 입력해주세요.")
             return;
-            } else if (post.title = " "){
-                window.alert("제목은 공백을 사용할 수 없습니다. 제목을 입력해주세요.")
-
-                return;
-        }
+            } 
         console.log("빈값확인용포스트", post)
         dispatch(detailActions.addContentMW(post));
         dispatch(addActions.addCalendarMW(post));
