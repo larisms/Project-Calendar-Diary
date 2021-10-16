@@ -3,7 +3,7 @@
 
 ## 👥 팀원 
 - Front 김갑민 ([Github](https://github.com/gabmin)), 박시영 ([Github](https://github.com/larisms)), 심선아 ([Github](https://github.com/jjubbu))
-- Back 김정호, 조원호
+- Back 김정호([Github](https://github.com/jeangho293)), 조원호([Github](https://github.com/Joe-wonho))
 
 ## 📆 개발기간
 - 2021/10/11 ~ 2021/10/16
