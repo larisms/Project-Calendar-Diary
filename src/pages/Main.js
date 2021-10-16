@@ -14,7 +14,7 @@ import Header from "../components/Header";
 
 import {detailShow} from "../redux/modules/show";
 import {actionCreators as calendarAction} from "../redux/modules/calendar";
-import showError from "../redux/modules/error";
+import showError from "../redux/modules/checkError";
 import {history} from "../redux/configureStore";
 
 const Main = (props) => {
@@ -105,13 +105,15 @@ const Main = (props) => {
                 }
             })
             .then((res) => {
-                if (res.status >= 400) {
-                    showError(res.status, res.data.msg);
-                    history.push('/error');
-                    return null;
-                }
+                
                 const post_list = res.data;
                 setList(post_list);
+            }).catch((err) => {
+                if(err.response.status === 404){
+                    history.push('/error404');
+                }else{
+                    history.push('/error500');
+                }
             });
     };
     //캘린더 익월로 이동하기 버튼
@@ -139,6 +141,12 @@ const Main = (props) => {
                 const post_list = res.data;
                 console.log(post_list);
                 setList(post_list);
+            }).catch((err) => {
+                if(err.response.status === 404){
+                    history.push('/error404');
+                }else{
+                    history.push('/error500');
+                }
             });
     };
 

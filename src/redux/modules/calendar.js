@@ -1,7 +1,7 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from "immer";
 import {apis} from "../../lib/axios";
-import showError from "./error";
+import showError from "./checkError";
 
 //Action
 const SET_CALENDAR = "SET_CALENDAR";
@@ -35,11 +35,6 @@ const setCalendarMW = (_today) => {
                 }
             })
             .then((res) => {
-                if(res.status >= 400){
-                    showError(res.status,res.data.msg);
-                    history.push('/error');
-                    return;
-                }
 
                 const post_list = res.data;
                 const new_list = post_list.map((l, idx) => {
@@ -52,6 +47,11 @@ const setCalendarMW = (_today) => {
             })
             .catch((err) => {
                 console.log("에러발생", err);
+                if(err.response.status === 404){
+                    history.push('/error404');
+                }else{
+                    history.push('/error500');
+                }
             });
     };
 };

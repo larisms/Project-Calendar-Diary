@@ -6,10 +6,11 @@ import {Cookies} from "react-cookie";
 
 import User from "../pages/User";
 import Main from "../pages/Main";
-import Error from "../pages/Error";
+import Error from "../pages/Error404";
+import Error_ from "../pages/Error500";
 
 import {history} from "../redux/configureStore";
-import showError from "../redux/modules/error";
+import showError from "../redux/modules/checkError";
 
 function App() {
     //로그인 안하고 확인할때 false 를 true 로 바꿔주세요
@@ -43,6 +44,12 @@ function App() {
                         history.push('/error');
 
                     }
+                }).catch((err) => {
+                    if(err.response.status === 404){
+                        history.push('/error404');
+                    }else{
+                        history.push('/error500');
+                    }
                 })
         }
     }, [])
@@ -55,7 +62,8 @@ function App() {
                     ? (<Route path="/" exact component={Main}/>)
                     : (<Route path="/login" exact component={User}/>)
             }
-            <Route path="/error" exact="exact" component={Error}/>
+            <Route path="/error404" exact="exact" component={Error}/>
+            <Route path="/error500" exact="exact" component={Error_}/>
         </ConnectedRouter>
 
     );
