@@ -5,7 +5,7 @@ import {createAction, handleActions} from "redux-actions";
 import {apis} from "../../lib/axios";
 import {signupShow, loginShow} from "./show";
 import {Cookies} from "react-cookie";
-import showError from "./error";
+import showError from "./checkError";
 
 //로그인,회원가입 페이지 렌더링 응답? 회원가입 정보 초기값
 const initialState = {
@@ -45,15 +45,15 @@ const createAccountMW = (userID, PW, confirmPW) => {
                     dispatch(creatAccount_(user))
                     dispatch(signupShow(false));
                     dispatch(loginShow(true));
-                } else if (res.status >= 400) {
-                    showError(res.status, res.data.msg);
-                    history.push('/error');
-
-                }
-
+                } 
             })
             .catch((error) => {
                 console.log(error)
+                if(error.response.status === 404){
+                    history.push('/error404');
+                }else{
+                    history.push('/error500');
+                }
             });
     }
 }
@@ -64,16 +64,17 @@ const checkOverlapMW = (userID) => {
         apis
             .checkOverlapAX(userID)
             .then((res) => {
-                if (res.status >= 400) {
-                    showError(res.status, res.data.msg);
-                    history.push('/error');
-                    return;
-                }
+               
                 dispatch(changeWarnID(res.data.msg))
                 console.log("중복확인 성공")
             })
             .catch((error) => {
                 console.log(error)
+                if(error.response.status === 404){
+                    history.push('/error404');
+                }else{
+                    history.push('/error500');
+                }
             });
     }
 }
@@ -94,14 +95,16 @@ const loginMW = (userID, PW) => {
                     window
                         .location
                         .reload();
-                } else if (res.status >= 400) {
-                    showError(res.status, res.data.msg);
-                    history.push('/error');
-
-                } else {
+                }else {
                     alert(res.data.msg);
                 }
                 console.log("response:::", res);
+            }).catch((err) => {
+                if(err.response.status === 404){
+                    history.push('/error404');
+                }else{
+                    history.push('/error500');
+                }
             })
     }
 }

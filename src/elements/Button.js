@@ -40,11 +40,6 @@ border:${(props)=>props.border};
 border-radius:${(props)=>props.borderRadius};
 
 &:hover{
-    /* background:darken(${(props)=>props.backGround},30%); */
-    /* background: #ffde00;
-     */
-    /* filter: brightness(80%);
-     */
     border-top: 1px solid rgba(0,0,0,.1);
     border-right: 1px solid rgba(255,255,255,.2);
     border-bottom: 1px solid rgba(255,255,255,.2);

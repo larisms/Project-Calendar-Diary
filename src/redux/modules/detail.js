@@ -3,7 +3,7 @@ import {produce} from "immer";
 import {apis} from "../../lib/axios";
 
 import {actionCreators as editAction} from "./calendar"
-import showError from "./error";
+import showError from "./checkError";
 
 const SET_CONTENT = "SET_CONTENT";
 const ADD_CONTENT = "ADD_CONTENT";
@@ -39,11 +39,7 @@ const setContentMW = (date) => {
                 }
             })
             .then((res) => {
-                if(res.status >= 400){
-                    showError(res.status,res.data.msg);
-                    history.push('/error');
-                    return;
-                }
+
                 const _post_list = res
                 console.log("리스폰스", _post_list);
                 const post_list = res.data;
@@ -52,6 +48,11 @@ const setContentMW = (date) => {
             })
             .catch((err) => {
                 console.log("로드에러", err)
+                if(err.response.status === 404){
+                    history.push('/error404');
+                }else{
+                    history.push('/error500');
+                }
             })
         }
 };
@@ -62,16 +63,15 @@ const addContentMW = (post) => {
         apis
             .addContentAX(post)
             .then((res) => {
-                if(res.status >= 400){
-                    showError(res.status,res.data.msg);
-                    history.push('/error');
-                    return;
-                }
                 dispatch(addContent(post));
                 // console.log("[detail.js] addContentAX :::", res);
             })
             .catch((err) => {
-                console.log("애드에러", err);
+                if(err.response.status === 404){
+                    history.push('/error404');
+                }else{
+                    history.push('/error500');
+                }
             });
     };
 };
@@ -82,11 +82,7 @@ const udtContentMW = (id, post) => {
         apis
             .udtContentAX(id, post)
             .then((res) => {
-                if(res.status >= 400){
-                    showError(res.status,res.data.msg);
-                    history.push('/error');
-                    return;
-                }
+                
                 console.log(post)
                 dispatch(udtContent(id, post));
                 dispatch(editAction.editCalendar(post))
@@ -107,16 +103,17 @@ const delContentMW = (id) => {
                 }
             })
             .then((res) => {
-                if(res.status >= 400){
-                    showError(res.status,res.data.msg);
-                    history.push('/error');
-                    return;
-                }
+            
                 console.log("알이에스", res);
                 dispatch(delContent(id));
             })
             .catch((err) => {
                 console.log("삭제에러", err);
+                if(err.response.status === 404){
+                    history.push('/error404');
+                }else{
+                    history.push('/error500');
+                }
             });
     };
 };
