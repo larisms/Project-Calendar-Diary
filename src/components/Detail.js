@@ -48,13 +48,15 @@ const Detail = (props) => {
         scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
     }
 
-
+    // style="fill:rgb;"
 
     return (
         <React.Fragment>
             <ModalBG>
                 <DiaryHead>
-                    <GoToTop onClick={goToTop}>{'<'}</GoToTop>
+                    <GoToTop onClick={goToTop}>
+                        {<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#655f5b" d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z" /></svg>}
+                    </GoToTop>
                     <DiaryDate >{date}</DiaryDate>
                     <CloseBtn onClick={exitDetail}>+</CloseBtn>
                 </DiaryHead>
@@ -133,7 +135,7 @@ font-size: 28px;
 font-weight: 500;
 color: #655f5b;
 background-color: #ffffff00;
-transform: rotate(90deg);
+transform: rotate(270deg);
 border: none;
 border-radius: 5px;
 cursor: pointer;
