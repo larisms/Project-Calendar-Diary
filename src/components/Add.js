@@ -266,8 +266,6 @@ font-size: 20px;
 white-space: pre-wrap;
 `;
 
-
-
 const InputDiv = styled.div`
 width: 80%;
 height: 70%;
@@ -291,7 +289,7 @@ height:25px;
 border-radius: 100px;
 border: none;
 opacity: 0.5;
-margin-right: 10px;
+margin: 0 5px;
 cursor: pointer;
   &.on {
     opacity: 1;
@@ -305,7 +303,6 @@ cursor: pointer;
   }
 background-color: ${(props) => props.color};
 `;
-
 
 const SubText = styled.p`
 font-family: 'Nanum Myeongjo', serif;
